@@ -1,3 +1,6 @@
+const productsService = require("./products.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+
 /**
  * List handler for reservation resources
  */

@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import Layout from "../Layout";
 import ReservationForm from "./ReservationForm";
 import { createReservation } from "../../utils/api";
 import {formatAsTime, formatAsDate} from "../../utils/date-time";
-
+import {useHistory} from "react-router-dom";
 
 function NewReservation() {
     const initialReservationValues = {
@@ -12,43 +11,48 @@ function NewReservation() {
       mobile_number: "",
       reservation_date: "",
       reservation_time: "",
-      people: 0,
+      people: 1,
     }
     const [reservationForm, setReservationForm] = useState({...initialReservationValues});
     const history = useHistory();
 
     const handleSubmit = async (event) => {
       event.preventDefault();
-      const abortController = new AbortController;
+      const abortController = new AbortController();
       const newReservation = {
         ...reservationForm,
-        people: Number(reservationForm.people),
-        reservation_date: formatAsDate(reservationForm.reservation_date),
-        reservation_time: formatAsTime(reservationForm.reservation_time),
       }
 
       try {
         const response = await createReservation(newReservation, abortController.signal);
-
+        setReservationForm({...initialReservationValues})
+        console.log(response)
       } catch (error) {
-        
+        console.log(error)
       }
 
       console.log("Submitted:", reservationForm);
-      setFormData({...initialValues})
+      setReservationForm({...initialReservationValues})
     }
 
-    const handleChange = ({target}) => {
-      const value = target.value;
-      setFormData({
-        ...formData,
-        [target.name]: value,
-      })
+    const handleChange =  ({target}) => {
+      const {type, value, name} = target;
+
+       setReservationForm({
+        ...reservationForm,
+        ...(type === "number") && {[name]: Number(value)},
+        ...(type === "date") && {[name]: formatAsDate(value)},
+        ...(type === "time") && {[name]: formatAsTime(value)},
+        ...(type === "text") && {[name]: value},
+      });
     }
 
+    const cancelHandler = async (event) => {
+      console.log("!")
+    }
     return(
         <div>
-          <ReservationForm changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
+          <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
         </div>
     )
 }

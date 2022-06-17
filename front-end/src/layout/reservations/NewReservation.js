@@ -19,20 +19,18 @@ function NewReservation() {
     const handleSubmit = async (event) => {
       event.preventDefault();
       const abortController = new AbortController();
-      const newReservation = {
-        ...reservationForm,
-      }
 
       try {
-        const response = await createReservation(newReservation, abortController.signal);
+        const response = await createReservation(reservationForm, abortController.signal);
         setReservationForm({...initialReservationValues})
         console.log(response)
       } catch (error) {
         console.log(error)
       }
 
-      console.log("Submitted:", reservationForm);
-      setReservationForm({...initialReservationValues})
+      return () => {
+        abortController.abort();
+      };
     }
 
     const handleChange =  ({target}) => {

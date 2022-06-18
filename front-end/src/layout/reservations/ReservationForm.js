@@ -38,7 +38,8 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     className="form-control"
                     name="mobile_number"
                     id="mobile_number"
-                    type="text"
+                    type="tel"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     onChange={changeHandler}
                     placeholder="999-999-9999"
                 />

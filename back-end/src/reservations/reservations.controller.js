@@ -5,7 +5,9 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
  * List handler for reservation resources
  */
 async function list(req, res) {
-  const data = await service.list();
+  const reservation_date = req.query.date;
+  console.log(reservation_date)
+  const data = await service.list(reservation_date);
   res.json({ data });
 }
 

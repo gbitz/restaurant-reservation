@@ -25,11 +25,11 @@ function NewReservation() {
       const newReservation = {
         ...reservationForm
       }
+      console.log(newReservation)
       try {
         const response = await createReservation(newReservation, abortController.signal);
         setReservationForm({...initialReservationValues});
         history.push(`/dashboard?date=${newReservation.reservation_date}`)
-        console.log(newReservation.reservation_date);
       } catch (error) {
         if (error.name !== "AbortError") {setError(error)}
       }
@@ -41,13 +41,12 @@ function NewReservation() {
 
     const handleChange =  ({target}) => {
       const {type, value, name} = target;
-
        setReservationForm({
         ...reservationForm,
         ...(type === "number") && {[name]: Number(value)},
-        ...(type === "date") && {[name]: formatAsDate(value)},
-        ...(type === "time") && {[name]: formatAsTime(value)},
-        ...(type === "text") && {[name]: value},
+        ...(type === "date" && name === "reservation_date") && {[name]: formatAsDate(value)},
+        ...(type === "time" && name === "reservation_time") && {[name]: formatAsTime(value)},
+        ...(type === "text" || type === "tel") && {[name]: value},
       });
     }
 

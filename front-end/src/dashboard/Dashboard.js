@@ -2,20 +2,17 @@ import React, { useEffect, useState } from "react";
 import { listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import queryString from "query-string"
+import DateSelector from "./DateSelector";
 /**
  * Defines the dashboard page.
  * @param date
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({ date }) {
+function Dashboard({ date, setDate }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
-  //check if date query is entered URL
-  if (queryString.parse(window.location.search).date) {
-    date = queryString.parse(window.location.search).date
-  }
-
+ 
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
@@ -35,6 +32,7 @@ function Dashboard({ date }) {
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={reservationsError} />
+      <DateSelector date={date} setDate={setDate} />
       {JSON.stringify(reservations)}
     </main>
   );

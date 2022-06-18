@@ -3,6 +3,7 @@ import ReservationForm from "./ReservationForm";
 import { createReservation } from "../../utils/api";
 import {formatAsTime, formatAsDate} from "../../utils/date-time";
 import {useHistory} from "react-router-dom";
+import ErrorAlert from "../ErrorAlert";
 
 function NewReservation() {
     const initialReservationValues = {
@@ -13,7 +14,9 @@ function NewReservation() {
       reservation_time: "",
       people: 1,
     }
+
     const [reservationForm, setReservationForm] = useState({...initialReservationValues});
+    const [error, setError] = useState(false)
     const history = useHistory();
 
     const handleSubmit = async (event) => {
@@ -28,7 +31,7 @@ function NewReservation() {
         history.push(`/dashboard?date=${newReservation.reservation_date}`)
         console.log(newReservation.reservation_date);
       } catch (error) {
-        console.log(error);
+        if (error.name !== "AbortError") {setError(error)}
       }
 
       return () => {
@@ -54,6 +57,7 @@ function NewReservation() {
     }
     return(
         <div>
+          <ErrorAlert error={error} />
           <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
         </div>
     )

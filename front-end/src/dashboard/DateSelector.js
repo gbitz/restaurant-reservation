@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {previous, next, today} from "../utils/date-time";
 
-function DateSelector({date, setDate}) {
+function DateSelector({date, history}) {
 
     return (
         <div class="card">
@@ -10,9 +10,9 @@ function DateSelector({date, setDate}) {
         </div>
         <div class="card-body">
         <div>{date}</div>
-        <button class="btn btn-primary" onClick={()=>{setDate(previous(date))}}>Previous</button>
-        <button class="btn btn-primary" onClick={()=>{setDate(today())}}>Today</button>
-        <button class="btn btn-primary" onClick={()=>{setDate(next(date))}}>Next</button>
+        <button class="btn btn-primary" onClick={()=>{history.push(`/dashboard?date=${previous(date)}`)}}>Previous</button>
+        <button class="btn btn-primary" onClick={()=>{history.push(`/dashboard?date=${today()}`)}}>Today</button>
+        <button class="btn btn-primary" onClick={()=>{history.push(`/dashboard?date=${next(date)}`)}}>Next</button>
         </div>
         </div>
     )

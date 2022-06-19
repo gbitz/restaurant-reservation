@@ -25,7 +25,7 @@ function NewReservation() {
       const newReservation = {
         ...reservationForm
       }
-      console.log(newReservation)
+      // console.log(newReservation)
       try {
         const response = await createReservation(newReservation, abortController.signal);
         setReservationForm({...initialReservationValues});

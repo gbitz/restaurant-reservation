@@ -53,13 +53,25 @@ function checkDayOfWeek(req,res,next) {
 
 function checkFutureDate(req,res,next) {
   const today = new Date();
-  const {reservation_date} = req.body.data;
-  const testDate =  new Date(reservation_date)
+  const {reservation_date, reservation_time} = req.body.data;
+  const testDate =  new Date(`${reservation_date} ${reservation_time}`)
   // console.log((today.getTime() < testDate.getTime()))
   if (today.getTime() < testDate.getTime()) {
     return next();
   }
   next({status:400, message:`Reservation must be in the future`})
+}
+
+function checkValidTime(req,res,next) {
+  const {reservation_time} = req.body.data;
+  const testTime = reservation_time;
+  const openTime = "10:30";
+  const closeTime = "21:30";
+  // console.log(testTime);
+  if (testTime >= openTime && testTime <= closeTime){
+    return next();
+  }
+  next({status:400, message:`Time must be between 10:30 AM and 9:30 PM`})
 }
 
 /**
@@ -94,6 +106,7 @@ module.exports = {
     checkPeopleType,
     checkDayOfWeek,
     checkFutureDate,
+    checkValidTime,
     asyncErrorBoundary(create)
   ]
 };

@@ -26,7 +26,6 @@ function checkDateType(req,res,next) {
 function checkTimeType(req,res,next) {
   const validTimeRegex = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/;
   const {reservation_time} = req.body.data;
-  console.log(validTimeRegex.test(reservation_time))
   if (validTimeRegex.test(reservation_time)) {
     return next();
   }
@@ -39,6 +38,28 @@ function checkPeopleType(req,res,next) {
     return next();
   }
   next({status : 400, message: `people must be type 'number'`})
+}
+
+function checkDayOfWeek(req,res,next) {
+  const {reservation_date} = req.body.data;
+  const testDate = new Date(reservation_date)
+  // console.log(testDate)
+  // console.log(testDate.getDay())
+  if (testDate.getDay() != "1") {
+    return next();
+  }
+  next({status:400, message:`Restaurant closed on Tuesdays`})
+}
+
+function checkFutureDate(req,res,next) {
+  const today = new Date();
+  const {reservation_date} = req.body.data;
+  const testDate =  new Date(reservation_date)
+  console.log(today < testDate)
+  if (today < reservation_date) {
+    return next();
+  }
+  next({status:400, message:`Reservation must be in the future`})
 }
 
 /**
@@ -71,6 +92,8 @@ module.exports = {
     checkDateType,
     checkTimeType,
     checkPeopleType,
+    checkDayOfWeek,
+    checkFutureDate,
     asyncErrorBoundary(create)
   ]
 };

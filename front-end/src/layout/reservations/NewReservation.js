@@ -16,7 +16,7 @@ function NewReservation() {
     }
 
     const [reservationForm, setReservationForm] = useState({...initialReservationValues});
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(null)
     const history = useHistory();
 
     const handleSubmit = async (event) => {
@@ -56,8 +56,12 @@ function NewReservation() {
     }
     return(
         <div>
-          <ErrorAlert error={error} />
-          <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
+          <div>
+            <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
+          </div>
+          <div>
+            <ErrorAlert error={error} />
+          </div>
         </div>
     )
 }

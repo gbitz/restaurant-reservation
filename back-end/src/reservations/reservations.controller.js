@@ -55,8 +55,8 @@ function checkFutureDate(req,res,next) {
   const today = new Date();
   const {reservation_date} = req.body.data;
   const testDate =  new Date(reservation_date)
-  console.log(today < testDate)
-  if (today < reservation_date) {
+  // console.log((today.getTime() < testDate.getTime()))
+  if (today.getTime() < testDate.getTime()) {
     return next();
   }
   next({status:400, message:`Reservation must be in the future`})

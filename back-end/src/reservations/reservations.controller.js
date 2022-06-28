@@ -92,6 +92,28 @@ async function create(req, res) {
   res.status(201).json({data: reservation})
 }
 
+/**
+ * Checks to see if reservation exists
+ */
+async function reservationExists(req,res,next) {
+  const foundReservation = await service.read(req.params.reservation_id);
+
+  if (foundReservation) {
+    res.locals.reservation = foundReservation;
+    return next();
+  }
+  next({status: 404, message: `Reservation Not Found in Records`})
+}
+
+
+/**
+ * Read handler for reservation resource
+ */
+async function read(req, res) {
+  const {reservation} = res.locals
+  res.json({data : reservation})
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -108,5 +130,9 @@ module.exports = {
     checkFutureDate,
     checkValidTime,
     asyncErrorBoundary(create)
+  ],
+  read: [
+    reservationExists,
+    asyncErrorBoundary(read)
   ]
 };

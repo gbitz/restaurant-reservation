@@ -40,8 +40,6 @@ function Dashboard({ date, setDate }) {
 
   useEffect(loadDashboard, [date]);
   
-  
-
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
@@ -49,8 +47,7 @@ function Dashboard({ date, setDate }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    
-      listTables(abortController.signal)
+    listTables(abortController.signal)
       .then(setTables)
       .catch(setTablesError);
     return () => abortController.abort();
@@ -68,7 +65,6 @@ function Dashboard({ date, setDate }) {
       <ReservationView reservations={reservations} />
       <TableView tables={tables} />
       {JSON.stringify(reservations)}
-      
     </main>
   );
 }

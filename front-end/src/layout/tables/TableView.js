@@ -1,14 +1,37 @@
 import React from "react";
 
 function TableView({tables}) {
-    const tablesList = tables.map((table) => {
+    const tablesList = tables.map((table, index) => {
         return (
-            <div>{table.table_name}</div>
+            <tr key={table.tableId}>
+                <th scope="row">{table.tableId}</th>
+                <td>{table.table_name}</td>   
+                <td>{table.capacity}</td>
+                {table.reservation_id
+                    ? <td data-table-id-status={table.table_id}>Occupied</td>
+                    : <td data-table-id-status={table.table_id}>Free</td>
+                }
+            </tr>
         )
     })
     return (
         <div>
-            {tablesList}
+            <table className="table table-striped">
+                
+                <thead>
+                    <tr>
+                        <th scope="col">Table ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Capacity</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                 {tablesList}
+                </tbody>
+
+            </table>
         </div>
     )
 

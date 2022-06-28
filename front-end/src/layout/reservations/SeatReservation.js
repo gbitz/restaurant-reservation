@@ -55,8 +55,10 @@ function SeatReservation(){
         const newSeat = {
             ...form
         };
+
         try {
-            console.log("Seat reservation() to be added");
+            const response = await seatReservation(reservation, newSeat.table_id, abortController.signal)
+            console.log("Success: " + response);
             history.push("/dashboard");
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}

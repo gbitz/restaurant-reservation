@@ -6,6 +6,9 @@ import DateSelector from "./DateSelector";
 import useQuery from "../utils/useQuery"
 import {useHistory} from "react-router-dom"
 import ReservationView from "../layout/reservations/ReservationView";
+import { today } from "../utils/date-time";
+import TableView from "../layout/tables/TableView"
+
 /**
  * Defines the dashboard page.
  * @param date
@@ -20,15 +23,26 @@ function Dashboard({ date, setDate }) {
   const query = useQuery();
   const history = useHistory();
   
-  if (query) {
-    setDate(query.get("date"))
-  } 
-  useEffect(loadDashboard, [date]);
+  // if (query) {
+  //   setDate(query.get("date"))
+  // }
+  useEffect(() => {
+    const dateQueryCheck = () => {
+      const dateQuery = query.get("date");
+      if (dateQuery) {
+        setDate(dateQuery)
+      } else {
+        setDate(today());
+      }
+    }
+    dateQueryCheck() 
+  }, [query, setDate])
 
+  useEffect(loadDashboard, [date]);
+  
   
 
   function loadDashboard() {
-    
     const abortController = new AbortController();
     setReservationsError(null);
     setTablesError(null)
@@ -39,7 +53,6 @@ function Dashboard({ date, setDate }) {
       listTables(abortController.signal)
       .then(setTables)
       .catch(setTablesError);
-    
     return () => abortController.abort();
   }
   
@@ -53,8 +66,9 @@ function Dashboard({ date, setDate }) {
       <ErrorAlert error={tablesError} />
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
+      <TableView tables={tables} />
       {JSON.stringify(reservations)}
-      {JSON.stringify(tables)}
+      
     </main>
   );
 }

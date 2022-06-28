@@ -28,6 +28,7 @@ function NewReservation() {
       // console.log(newReservation)
       try {
         const response = await createReservation(newReservation, abortController.signal);
+        console.log("Success: " + response)
         setReservationForm({...initialReservationValues});
         history.push(`/dashboard?date=${newReservation.reservation_date}`)
       } catch (error) {

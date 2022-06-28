@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {previous, next, today} from "../utils/date-time";
 
 function DateSelector({date, history}) {

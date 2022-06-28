@@ -1,9 +1,9 @@
 import React from "react";
 
 function ReservationView({reservations}) {
-    const reservationList = reservations.map((reservation) => {
+    const reservationList = reservations.map((reservation, index) => {
         return (
-            <tr>
+            <tr key={reservation.reservation_id}>
                 <th scope="row">{reservation.reservation_id}</th>
                 <td>{reservation.first_name}</td>   
                 <td>{reservation.last_name}</td>

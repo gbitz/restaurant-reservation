@@ -1,7 +1,7 @@
 import React, { useEffect, useState,  } from "react";
 import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-import queryString from "query-string"
+// import queryString from "query-string"
 import DateSelector from "./DateSelector";
 import useQuery from "../utils/useQuery"
 import {useHistory} from "react-router-dom"
@@ -31,6 +31,7 @@ function Dashboard({ date, setDate }) {
     
     const abortController = new AbortController();
     setReservationsError(null);
+    setTablesError(null)
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);

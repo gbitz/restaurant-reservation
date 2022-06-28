@@ -9,7 +9,7 @@ function NewTable() {
     }
 
     const [tableForm, setTableForm] =  useState({...intialTableValues});
-    const [error, setError] =  useState(null);
+    // const [error, setError] =  useState(null);
     const history = useHistory();
 
     const handleSubmit = async (event) => {

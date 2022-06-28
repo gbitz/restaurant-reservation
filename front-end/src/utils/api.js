@@ -92,10 +92,10 @@ export async function createTable(table, signal) {
   const options = {
     method: "POST",
     headers,
-    body: JSON.stringify({data: reservation}),
+    body: JSON.stringify({data: table}),
     signal,
   }
-  return await fetchJson(url, options, reservation)
+  return await fetchJson(url, options, table)
 }
 
 /**

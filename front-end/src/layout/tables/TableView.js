@@ -4,7 +4,7 @@ function TableView({tables}) {
     const tablesList = tables.map((table, index) => {
         return (
             <tr key={table.tableId}>
-                <th scope="row">{table.tableId}</th>
+                {/* <th scope="row">{table.table_id}</th> */}
                 <td>{table.table_name}</td>   
                 <td>{table.capacity}</td>
                 {table.reservation_id
@@ -20,7 +20,7 @@ function TableView({tables}) {
                 
                 <thead>
                     <tr>
-                        <th scope="col">Table ID</th>
+                        {/* <th scope="col">Table ID</th> */}
                         <th scope="col">Name</th>
                         <th scope="col">Capacity</th>
                         <th scope="col">Status</th>

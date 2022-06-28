@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import TableForm from "./TableForm";
+import { createTable } from "../../utils/api";
 
 function NewTable() {
     const intialTableValues = {
@@ -9,7 +10,7 @@ function NewTable() {
     }
 
     const [tableForm, setTableForm] =  useState({...intialTableValues});
-    // const [error, setError] =  useState(null);
+    const [error, setError] =  useState(null);
     const history = useHistory();
 
     const handleSubmit = async (event) => {
@@ -19,7 +20,15 @@ function NewTable() {
             ...tableForm
         }
 
-        console.log(newTable);
+        try {
+            const response = await createTable(newTable, abortController.signal);
+            console.log("Success: " + response);
+            setTableForm({...intialTableValues});
+            history.push("/dashboard")
+        } catch (error) {
+            if(error.name !==  "AbortError") {setError(error)}
+        }
+        
         return()=>{
             abortController.abort();
         };
@@ -44,6 +53,9 @@ function NewTable() {
         <div>
             <div>
                 <TableForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} tableForm={tableForm} />
+            </div>
+            <div>
+                <ErrorAlert error={error}/>
             </div>
         </div>
     )

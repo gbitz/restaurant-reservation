@@ -64,7 +64,7 @@ function Dashboard({ date, setDate }) {
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
       <TableView tables={tables} />
-      {JSON.stringify(reservations)}
+      {/* {JSON.stringify(reservations)} */}
     </main>
   );
 }

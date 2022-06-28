@@ -112,3 +112,16 @@ export async function listTables(signal) {
   };
   return await fetchJson(url, options)
 }
+
+/**
+ * Retrieves data on a specified reservation
+ */
+export async function readReservation(reservation_id, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations/${reservation_id}`);
+  const options = {
+    method: "GET",
+    headers,
+    signal,
+  }
+  return await fetchJson(url,options, {})
+}

@@ -125,3 +125,10 @@ export async function readReservation(reservation_id, signal) {
   }
   return await fetchJson(url,options, {})
 }
+
+/**
+ * Seats reservation to designated table
+ */
+export async function seatReservation(reservation_id, table_id, signal){
+  
+} 

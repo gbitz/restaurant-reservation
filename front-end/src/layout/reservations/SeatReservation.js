@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {useParams, useHistory} from "react-router-dom";
 import ErrorAlert from "../ErrorAlert";
-import {readReservation, listTables} from "../../utils/api";
+import {readReservation, listTables, seatReservation} from "../../utils/api";
 import TableView from "../tables/TableView";
-import SeatForm from "./SeatForm"
+import SeatForm from "./SeatForm";
 
 function SeatReservation(){
     const initialForm = {
@@ -52,18 +52,21 @@ function SeatReservation(){
     const submitHandler = async (event) => {
         event.preventDefault();
         const abortController = new AbortController();
-        const newSeat = {
-            ...form
-        };
-
+        const table_id = Number(form.table_id);
+        const {reservation_id} = reservation;
+        // console.log(Number(table_id))
+        // console.log(reservation_id)
         try {
-            const response = await seatReservation(reservation, newSeat.table_id, abortController.signal)
+            const response = await seatReservation(reservation_id, table_id, abortController.signal)
             console.log("Success: " + response);
+            setForm({...initialForm})
             history.push("/dashboard");
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}
         }
-        return abortController.abort();
+        return () => {
+            abortController.abort();
+        };
     }
     
 

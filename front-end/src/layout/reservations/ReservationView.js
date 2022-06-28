@@ -1,7 +1,6 @@
 import React from "react";
 
 function ReservationView({reservations}) {
-    console.log(reservations)
     const reservationList = reservations.map((reservation) => {
         return (
             <tr>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,  } from "react";
-import { listReservations } from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import queryString from "query-string"
 import DateSelector from "./DateSelector";
@@ -15,6 +15,8 @@ import ReservationView from "../layout/reservations/ReservationView";
 function Dashboard({ date, setDate }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const [tables, setTables] = useState([]);
+  const [tablesError, setTablesError] = useState(null);
   const query = useQuery();
   const history = useHistory();
   
@@ -32,6 +34,11 @@ function Dashboard({ date, setDate }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    
+      listTables(abortController.signal)
+      .then(setTables)
+      .catch(setTablesError);
+    
     return () => abortController.abort();
   }
   
@@ -42,9 +49,11 @@ function Dashboard({ date, setDate }) {
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={reservationsError} />
+      <ErrorAlert error={tablesError} />
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
       {JSON.stringify(reservations)}
+      {JSON.stringify(tables)}
     </main>
   );
 }

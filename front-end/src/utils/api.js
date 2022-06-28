@@ -103,10 +103,12 @@ export async function createTable(table, signal) {
  * @returns {Promise<[table]>}
  * a promise that resolves ot apissible empty array of table saved in the database
  */
-export async function listTables(params, signal) {
+export async function listTables(signal) {
   const url = new URL(`${API_BASE_URL}/tables`);
-  Object.entries(params).forEach(([key, value]) =>
-    url.searchParams.append(key, value.toString())
-  );
-  return await fetchJson(url, { headers, signal }, [])
+  const options = {
+    method: "GET",
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options)
 }

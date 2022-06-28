@@ -5,6 +5,7 @@ import queryString from "query-string"
 import DateSelector from "./DateSelector";
 import useQuery from "../utils/useQuery"
 import {useHistory} from "react-router-dom"
+import ReservationView from "../layout/reservations/ReservationView";
 /**
  * Defines the dashboard page.
  * @param date
@@ -33,7 +34,7 @@ function Dashboard({ date, setDate }) {
       .catch(setReservationsError);
     return () => abortController.abort();
   }
-
+  
   return (
     <main>
       <h1>Dashboard</h1>
@@ -42,6 +43,7 @@ function Dashboard({ date, setDate }) {
       </div>
       <ErrorAlert error={reservationsError} />
       <DateSelector date={date} setDate={setDate} history={history} />
+      <ReservationView reservations={reservations} />
       {JSON.stringify(reservations)}
     </main>
   );

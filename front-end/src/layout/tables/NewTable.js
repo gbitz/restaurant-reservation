@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import TableForm from "./TableForm";
 import { createTable } from "../../utils/api";
+import ErrorAlert from "../ErrorAlert";
 
 function NewTable() {
     const intialTableValues = {
@@ -24,7 +25,7 @@ function NewTable() {
             const response = await createTable(newTable, abortController.signal);
             console.log("Success: " + response);
             setTableForm({...intialTableValues});
-            history.push("/dashboard")
+            history.goBack()
         } catch (error) {
             if(error.name !==  "AbortError") {setError(error)}
         }

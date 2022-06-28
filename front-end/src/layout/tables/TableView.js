@@ -3,7 +3,7 @@ import React from "react";
 function TableView({tables}) {
     const tablesList = tables.map((table, index) => {
         return (
-            <tr key={table.tableId}>
+            <tr key={table.table_id}>
                 {/* <th scope="row">{table.table_id}</th> */}
                 <td>{table.table_name}</td>   
                 <td>{table.capacity}</td>

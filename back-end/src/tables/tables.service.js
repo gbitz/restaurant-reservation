@@ -6,6 +6,14 @@ function list() {
     .orderBy("table_name");
 }
 
+function create(table) {
+    return knex("tables")
+        .insert(table)
+        .returning("*")
+        .then((records) => records[0])
+}
+
 module.exports = {
     list,
+    create
 }

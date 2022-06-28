@@ -61,7 +61,6 @@ function SeatReservation(){
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}
         }
-
         return abortController.abort();
     }
     

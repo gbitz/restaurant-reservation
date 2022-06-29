@@ -18,6 +18,7 @@ function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm})
                     min={2}
                     onChange={changeHandler}
                     placeholder="Table Name"
+                    required
                 />
                 
                 <label>
@@ -31,6 +32,7 @@ function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm})
                     min={1}
                     placeholder={1}
                     onChange={changeHandler}
+                    required
                 />
            
                 </div>

@@ -14,22 +14,24 @@ function NewTable() {
     const [error, setError] =  useState(null);
     const history = useHistory();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const abortController = new AbortController();
         const newTable = {
             ...tableForm
         }
-
-        try {
-            const response = await createTable(newTable, abortController.signal);
-            console.log("Success: " + response);
-            setTableForm({...intialTableValues});
-            history.goBack()
-        } catch (error) {
-            if(error.name !==  "AbortError") {setError(error)}
+        async function submitTable() {
+            try {
+                await createTable(newTable, abortController.signal);
+                // console.log(response);
+                setTableForm({...intialTableValues});
+                history.push("/dashboard")
+            } catch (error) {
+                if(error.name !==  "AbortError") {setError(error)}
+            }
         }
-        
+
+        submitTable();
         return()=>{
             abortController.abort();
         };

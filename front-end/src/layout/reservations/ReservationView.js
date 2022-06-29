@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 function ReservationView({reservations}) {
     const reservationList = reservations.map((reservation, index) => {
@@ -11,7 +12,11 @@ function ReservationView({reservations}) {
                 <td>{reservation.people}</td>
                 <td>{reservation.reservation_date}</td>
                 <td>{reservation.reservation_time}</td>
-                <td><a className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</a></td>
+                <td>
+                    <Link to={`/reservations/${reservation.reservation_id}/seat`}>
+                        <button className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</button>
+                    </Link>
+                </td>
             </tr>
         )
     });

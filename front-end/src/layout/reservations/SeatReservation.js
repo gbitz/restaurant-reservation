@@ -20,17 +20,25 @@ function SeatReservation(){
 
     useEffect(() => {
         const abortController = new AbortController();
-        async function loadData() {
+        async function loadReservation() {
             try {
-                const reservationResponse = await readReservation(reservation_id, abortController.signal);
-                const tablesResponse = await listTables();
-                setReservation(reservationResponse);
-                setTables(tablesResponse)
+                const response = await readReservation(reservation_id, abortController.signal);
+                setReservation(response);
             } catch (error) {
                 if (error.name !== "AbortError") {setError(error)}
             }
         }
-        loadData();
+
+        async function loadTables() {
+            try {
+                const response = await listTables();
+                setTables(response)
+            } catch (error) {
+                if (error.name !== "AbortError") {setError(error)}
+            }
+        }
+        loadReservation();
+        loadTables();
         return () => {
             abortController.abort();
         }; 
@@ -60,7 +68,7 @@ function SeatReservation(){
             await seatReservation(reservation_id, table_id, abortController.signal)
             // console.log("Success: " + response);
             setForm({...initialForm})
-            history.push("/dashboard");
+            history.push("/");
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}
         }
@@ -71,11 +79,10 @@ function SeatReservation(){
     
 
 
-    console.log(reservation)
     return(
         <div>
             <ErrorAlert error={error}/>
-            <SeatForm tables={tables} form={form} changeHandler={changeHandler} cancelHandler={cancelHandler} submitHandler={submitHandler} />
+            <SeatForm tables={tables} reservation={reservation} changeHandler={changeHandler} cancelHandler={cancelHandler} submitHandler={submitHandler} />
             <TableView tables={tables}/>
         </div>
     )

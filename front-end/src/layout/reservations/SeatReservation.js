@@ -57,8 +57,8 @@ function SeatReservation(){
         // console.log(Number(table_id))
         // console.log(reservation_id)
         try {
-            const response = await seatReservation(reservation_id, table_id, abortController.signal)
-            console.log("Success: " + response);
+            await seatReservation(reservation_id, table_id, abortController.signal)
+            // console.log("Success: " + response);
             setForm({...initialForm})
             history.push("/dashboard");
         } catch (error) {

@@ -5,7 +5,7 @@ function SeatForm({tables, changeHandler, cancelHandler, submitHandler, form}){
     const tablesMenu = tables.map((table)=> {
         return(
             <option key={table.table_id} value={table.table_id}>
-                {table.table_name} - {table.table_capacity}
+                {table.table_name} - {table.capacity}
             </option>
         )
     })

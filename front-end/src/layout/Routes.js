@@ -1,9 +1,7 @@
-import React, {useState} from "react";
-
+import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
-import { today } from "../utils/date-time";
 import NewReservation from "./reservations/NewReservation";
 import NewTable from "./tables/NewTable";
 import SeatReservation from "./reservations/SeatReservation"
@@ -18,7 +16,7 @@ import SeatReservation from "./reservations/SeatReservation"
  */
 function Routes() {
 
-  const [date, setDate] = useState(today());
+  // const [date, setDate] = useState(today());
 
   return (
     <Switch>
@@ -29,7 +27,7 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={date} setDate={setDate} />
+        <Dashboard />
       </Route>
       <Route exact={true} path="/reservations/new">
         <NewReservation />

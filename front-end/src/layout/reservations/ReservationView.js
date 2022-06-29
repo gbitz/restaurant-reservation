@@ -11,7 +11,7 @@ function ReservationView({reservations}) {
                 <td>{reservation.people}</td>
                 <td>{reservation.reservation_date}</td>
                 <td>{reservation.reservation_time}</td>
-                <td><a class="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</a></td>
+                <td><a className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</a></td>
             </tr>
         )
     });

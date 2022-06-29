@@ -15,41 +15,58 @@ import TableView from "../layout/tables/TableView"
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({ date, setDate }) {
+function Dashboard() {
   const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
+  // const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  const [tablesError, setTablesError] = useState(null);
+  // const [tablesError, setTablesError] = useState(null);
   const query = useQuery();
   const history = useHistory();
-  
+  const [date, setDate] = useState(today());
+  const [error, setError] = useState(null);
+
   // if (query) {
   //   setDate(query.get("date"))
   // }
   useEffect(() => {
-    const dateQueryCheck = () => {
+    const dateQueryCheck = async () => {
       const dateQuery = query.get("date");
       if (dateQuery) {
-        setDate(dateQuery)
+        setDate(dateQuery);
       } else {
         setDate(today());
       }
     }
-    dateQueryCheck() 
-  }, [query, setDate])
+    dateQueryCheck();
+  }, [query, date])
+
+
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    async function loadTables() {
+      setError(null);
+      try {
+        const response = await listTables(abortController.signal);
+        setTables(response);
+      } catch (error) {
+        if (error.name !== "AbortError") {setError(error)}
+      }
+    }
+    loadTables();
+    return () => {
+      abortController.abort();
+    }    
+  }, [])
 
   useEffect(loadDashboard, [date]);
-  
+
   function loadDashboard() {
     const abortController = new AbortController();
-    setReservationsError(null);
-    setTablesError(null)
+    setError(null)
     listReservations({ date }, abortController.signal)
       .then(setReservations)
-      .catch(setReservationsError);
-    listTables(abortController.signal)
-      .then(setTables)
-      .catch(setTablesError);
+      .catch(setError);
     return () => abortController.abort();
   }
   
@@ -59,8 +76,8 @@ function Dashboard({ date, setDate }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
-      <ErrorAlert error={reservationsError} />
-      <ErrorAlert error={tablesError} />
+      <ErrorAlert error={error} />
+      {/* <ErrorAlert error={tablesError} /> */}
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
       <TableView tables={tables} />

@@ -140,3 +140,13 @@ export async function seatReservation(reservation_id, table_id, signal){
   return await fetchJson(url, options, {})
 
 } 
+
+export async function readTable(table_id, signal) {
+  const url = new URL(`${API_BASE_URL}/tables/${table_id}`);
+  const options = {
+    method: "GET",
+    headers,
+    signal,
+  }
+  return await fetchJson(url,options, {})
+}

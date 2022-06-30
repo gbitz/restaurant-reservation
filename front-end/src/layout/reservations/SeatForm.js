@@ -4,9 +4,9 @@ function SeatForm({tables, reservation, changeHandler, cancelHandler, submitHand
     const tablesMenu = tables.map((table)=> {
         const invalidCapacity = Number(table.capacity) < Number(reservation.people)
         console.log(invalidCapacity)
-        if (!table.reservation_id) {
+        if (!table.reservation_id && !invalidCapacity) {
             return(
-                <option disabled={invalidCapacity} key={table.table_id} value={table.table_id}>{table.table_name} - {table.capacity}</option>
+                <option key={table.table_id} value={table.table_id}>{table.table_name} - {table.capacity}</option>
             )
         }
     })
@@ -26,4 +26,4 @@ function SeatForm({tables, reservation, changeHandler, cancelHandler, submitHand
     )
 }
 
-export default SeatForm
+export default SeatForm;

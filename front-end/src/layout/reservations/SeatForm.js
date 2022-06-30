@@ -3,12 +3,9 @@ import React from "react"
 function SeatForm({tables, reservation, changeHandler, cancelHandler, submitHandler}){
     const tablesMenu = tables.map((table)=> {
         const invalidCapacity = Number(table.capacity) < Number(reservation.people)
-        console.log(invalidCapacity)
-        if (!table.reservation_id && !invalidCapacity) {
             return(
-                <option key={table.table_id} value={table.table_id}>{table.table_name} - {table.capacity}</option>
+                <option disabled={invalidCapacity} key={table.table_id} value={table.table_id}>{table.table_name} - {table.capacity}</option>
             )
-        }
     })
 
     return (

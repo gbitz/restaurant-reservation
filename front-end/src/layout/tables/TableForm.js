@@ -28,7 +28,7 @@ function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm})
                     className="form-control"
                     name="capacity"
                     id="capacity"
-                    type="num"
+                    type="number"
                     min={1}
                     placeholder={1}
                     onChange={changeHandler}

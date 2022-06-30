@@ -62,12 +62,9 @@ function SeatReservation(){
         const abortController = new AbortController();
         const table_id = Number(form.table_id);
         const {reservation_id} = reservation;
-        
         try {
             await seatReservation(reservation_id, table_id, abortController.signal)
-            setForm({...initialForm})
-            console.log(document.URL)
-            history.push("/");
+            history.push("/dashboard");
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}
         }

@@ -16,6 +16,8 @@ function bodyDataHas(propertyName) {
 function checkValidCapacity(req, res, next) {
     const {capacity} = req.body.data;
     const testNumber = Number(capacity)
+    console.log(testNumber >= 1)
+    console.log(typeof(capacity))
     if(testNumber >= 1 && typeof(capacity) === "number") {
         return next();
     }

@@ -41,7 +41,7 @@ function NewTable() {
         const {type, value, name} = target;
         setTableForm({
             ...tableForm,
-            ...(type === "capacity") && {[name]: Number(value)},
+            ...(type === "number") && {[name]: Number(value)},
             ...(type === "text") && {[name]: value},
         });
     }

@@ -1,12 +1,10 @@
 import React from "react";
-// import {finishReservation, listTables} from "../../utils/api"
 function TableView({tables, handleFinish, loadTables}) {
 
 
     const tablesList = tables.map((table, index) => {
         return (
             <tr key={table.table_id}>
-                {/* <th scope="row">{table.table_id}</th> */}
                 <td>{table.table_name}</td>   
                 <td>{table.capacity}</td>
                 {table.reservation_id
@@ -16,12 +14,9 @@ function TableView({tables, handleFinish, loadTables}) {
                 {table.reservation_id
                     ? <td>
                         <button
-                             data-table-id-status={table.table_id}  
+                             data-table-id-finish={table.table_id}  
                              className="btn btn-danger" 
-                             onClick={()=> {
-                                 handleFinish(table.table_id)
-                                 
-                                 }}>
+                             onClick={()=> {handleFinish(table.table_id)}}>
                             Finish
                         </button>
                       </td>
@@ -36,7 +31,6 @@ function TableView({tables, handleFinish, loadTables}) {
                 
                 <thead>
                     <tr>
-                        {/* <th scope="col">Table ID</th> */}
                         <th scope="col">Name</th>
                         <th scope="col">Capacity</th>
                         <th scope="col">Status</th>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,  } from "react";
-import { listReservations, listTables } from "../utils/api";
+import { listReservations, listTables, finishReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 // import queryString from "query-string"
 import DateSelector from "./DateSelector";
@@ -17,17 +17,12 @@ import TableView from "../layout/tables/TableView"
  */
 function Dashboard() {
   const [reservations, setReservations] = useState([]);
-  // const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  // const [tablesError, setTablesError] = useState(null);
   const query = useQuery();
   const history = useHistory();
   const [date, setDate] = useState(today());
   const [error, setError] = useState(null);
 
-  // if (query) {
-  //   setDate(query.get("date"))
-  // }
   useEffect(() => {
     const dateQueryCheck = async () => {
       const dateQuery = query.get("date");
@@ -40,26 +35,25 @@ function Dashboard() {
     dateQueryCheck();
   }, [query, date])
 
-
-
   useEffect(() => {
-    const abortController = new AbortController();
-    async function loadTables() {
-      setError(null);
-      try {
-        const response = await listTables(abortController.signal);
-        setTables(response);
-      } catch (error) {
-        if (error.name !== "AbortError") {setError(error)}
-      }
-    }
     loadTables();
-    return () => {
-      abortController.abort();
-    }    
   }, [])
 
   useEffect(loadDashboard, [date]);
+
+  async function loadTables() {
+    const abortController = new AbortController();
+    setError(null);
+    try {
+      const response = await listTables(abortController.signal);
+      setTables(response);
+    } catch (error) {
+      if (error.name !== "AbortError") {setError(error)}
+    }
+    return () => {
+      abortController.abort();
+    } 
+  }
 
   function loadDashboard() {
     const abortController = new AbortController();
@@ -69,6 +63,22 @@ function Dashboard() {
       .catch(setError);
     return () => abortController.abort();
   }
+
+  async function handleFinish(table_id) {
+    const abortController = new AbortController();
+        try {
+          if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
+            await finishReservation(table_id, abortController.signal);
+            await loadTables();
+            // window.location.reload();
+          }
+        } catch (error) {
+            if (error.name !== "AbortError") {setError(error)}
+        }
+        return () => {
+            abortController.abort();
+        };
+  }
   
   return (
     <main>
@@ -77,10 +87,9 @@ function Dashboard() {
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={error} />
-      {/* <ErrorAlert error={tablesError} /> */}
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
-      <TableView tables={tables} setError={setError}/>
+      <TableView tables={tables} setError={setError} handleFinish={handleFinish} loadTables={loadTables}/>
       {/* {JSON.stringify(reservations)} */}
     </main>
   );

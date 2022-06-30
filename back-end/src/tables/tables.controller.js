@@ -16,8 +16,6 @@ function bodyDataHas(propertyName) {
 function checkValidCapacity(req, res, next) {
     const {capacity} = req.body.data;
     const testNumber = Number(capacity)
-    console.log(testNumber >= 1)
-    console.log(typeof(capacity))
     if(testNumber >= 1 && typeof(capacity) === "number") {
         return next();
     }
@@ -100,6 +98,24 @@ async function checkIfOccupied(req,res,next) {
     next({status:400, message:"table is occupied"})
 }
 
+async function checkIfNotOccupied(req,res,next) {
+    const {table} = res.locals;
+    if (table.reservation_id) {
+        return next();
+    }
+    next({status:400, message:"table is not occupied"})
+}
+
+async function finishReservation(req,res,next){
+    const {table} = res.locals;
+    const update = {
+        ...table,
+        reservation_id: null
+    }
+    const updatedTable = await service.update(update);
+    res.status(200).json({data: updatedTable});
+}
+
 
 module.exports ={
     list: asyncErrorBoundary(list),
@@ -118,4 +134,9 @@ module.exports ={
         checkIfOccupied,
         asyncErrorBoundary(update),
     ],
+    finishReservation: [
+        checkTableExists,
+        checkIfNotOccupied,
+        asyncErrorBoundary(finishReservation)
+    ]
 }

@@ -12,6 +12,7 @@ router.route("/")
     .post(controller.create)
 
 router.route("/:table_id/seat")
-    .put(controller.update);
+    .put(controller.update)
+    .delete(controller.finishReservation)
 
 module.exports = router;

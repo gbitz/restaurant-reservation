@@ -1,22 +1,7 @@
 import React from "react";
-import ErrorAlert from "../ErrorAlert";
-function TableView({tables, setError}) {
+// import {finishReservation, listTables} from "../../utils/api"
+function TableView({tables, handleFinish, loadTables}) {
 
-    async function handleFinish(table_id) {
-        const abortController = new AbortController();
-
-        if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
-            try {
-                // await finishReservation(table);
-            } catch (error) {
-                if (error.name !== "AbortError") {setError(error)}
-            }
-            return () => {
-                abortController.abort();
-              };
-        }
-    }
-    
 
     const tablesList = tables.map((table, index) => {
         return (
@@ -29,7 +14,17 @@ function TableView({tables, setError}) {
                     : <td data-table-id-status={table.table_id}>Free</td>
                 }
                 {table.reservation_id
-                    ? <td><button data-table-id-status={table.table_id}  className="btn btn-danger" onClick={()=>handleFinish(table.table_id)}>Finish</button></td>
+                    ? <td>
+                        <button
+                             data-table-id-status={table.table_id}  
+                             className="btn btn-danger" 
+                             onClick={()=> {
+                                 handleFinish(table.table_id)
+                                 
+                                 }}>
+                            Finish
+                        </button>
+                      </td>
                     : <td>Add Reservation</td>
                 }
             </tr>

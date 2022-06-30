@@ -141,3 +141,16 @@ export async function seatReservation(reservation_id, table_id, signal){
 
 } 
 
+/**
+ * Removes reservation from that is seated at table
+ */
+export async function finishReservation(table_id, signal) {
+  const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
+  const options = {
+    method: "DELETE",
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options);
+}
+

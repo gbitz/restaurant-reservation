@@ -80,7 +80,7 @@ function Dashboard() {
       {/* <ErrorAlert error={tablesError} /> */}
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} />
-      <TableView tables={tables} />
+      <TableView tables={tables} setError={setError}/>
       {/* {JSON.stringify(reservations)} */}
     </main>
   );

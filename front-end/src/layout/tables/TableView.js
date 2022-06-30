@@ -1,13 +1,13 @@
 import React from "react";
 import ErrorAlert from "../ErrorAlert";
-function TableView({tables}) {
+function TableView({tables, setError}) {
 
     async function handleFinish(table_id) {
         const abortController = new AbortController();
 
         if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             try {
-                await finishReservation(table);
+                // await finishReservation(table);
             } catch (error) {
                 if (error.name !== "AbortError") {setError(error)}
             }

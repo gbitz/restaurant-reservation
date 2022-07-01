@@ -126,6 +126,7 @@ async function updateStatus(req,res,next) {
     status: status
   }
   const data = await service.update(updateReservation)
+  console.log(data)
   res.status(200).json({data})
 }
 

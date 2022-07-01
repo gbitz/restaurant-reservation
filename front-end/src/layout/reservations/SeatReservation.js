@@ -16,6 +16,7 @@ function SeatReservation(){
     const [reservation, setReservation] = useState({});
     const [form, setForm] = useState({...initialForm})
     const history = useHistory();
+    
 
 
     useEffect(() => {
@@ -64,8 +65,8 @@ function SeatReservation(){
         const {reservation_id} = reservation;
         const status = "seated"
         try {
+            await updateStatus(reservation_id, status, abortController.signal);
             await seatReservation(reservation_id, table_id, abortController.signal);
-            await updateStatus(reservation_id, status, abortController.signal)
             history.push("/dashboard");
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}

@@ -61,6 +61,7 @@ function Dashboard() {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setError);
+    
     return () => abortController.abort();
   }
 
@@ -73,7 +74,6 @@ function Dashboard() {
             await updateStatus(reservation_id, status, abortController.signal);
             await loadDashboard();
             await loadTables();
-            // window.location.reload();
           }
         } catch (error) {
             if (error.name !== "AbortError") {setError(error)}

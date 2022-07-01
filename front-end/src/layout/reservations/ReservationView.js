@@ -16,11 +16,14 @@ function ReservationView({reservations}) {
                     <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
                     <td>
                         {
-                            reservation.status === "booked" ?
-                            <Link to={`/reservations/${reservation.reservation_id}/seat`}>
-                                <button className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</button>
+                            reservation.status === "booked" ? (
+                            <Link  className="btn btn-primary" to={`/reservations/${reservation.reservation_id}/seat`}>
+                                Seat
                             </Link>
-                             : null
+                            
+                            )
+                            :
+                            null                        
                         }
                     </td>
                 </tr>
@@ -42,7 +45,7 @@ function ReservationView({reservations}) {
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Seat</th>
+                        <th scope="col">Find Table</th>
                     </tr>
                 </thead>
 

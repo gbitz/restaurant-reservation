@@ -3,22 +3,30 @@ import {Link} from "react-router-dom"
 
 function ReservationView({reservations}) {
     const reservationList = reservations.map((reservation, index) => {
-        return (
-            <tr key={reservation.reservation_id}>
-                <th scope="row">{reservation.reservation_id}</th>
-                <td>{reservation.first_name}</td>   
-                <td>{reservation.last_name}</td>
-                <td>{reservation.mobile_number}</td>
-                <td>{reservation.people}</td>
-                <td>{reservation.reservation_date}</td>
-                <td>{reservation.reservation_time}</td>
-                <td>
-                    <Link to={`/reservations/${reservation.reservation_id}/seat`}>
-                        <button className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</button>
-                    </Link>
-                </td>
-            </tr>
-        )
+        if (reservation.status !== "finished") {
+            return (
+                <tr key={reservation.reservation_id}>
+                    <th scope="row">{reservation.reservation_id}</th>
+                    <td>{reservation.first_name}</td>   
+                    <td>{reservation.last_name}</td>
+                    <td>{reservation.mobile_number}</td>
+                    <td>{reservation.people}</td>
+                    <td>{reservation.reservation_date}</td>
+                    <td>{reservation.reservation_time}</td>
+                    <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
+                    <td>
+                        {
+                            reservation.status === "booked" ?
+                            <Link to={`/reservations/${reservation.reservation_id}/seat`}>
+                                <button className="btn btn-primary" href={`/reservations/${reservation.reservation_id}/seat`}>Seat</button>
+                            </Link>
+                             : null
+                        }
+                    </td>
+                </tr>
+            )
+        }
+
     });
     return(
         <div>
@@ -33,6 +41,7 @@ function ReservationView({reservations}) {
                         <th scope="col">Party Size</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Seat</th>
                     </tr>
                 </thead>

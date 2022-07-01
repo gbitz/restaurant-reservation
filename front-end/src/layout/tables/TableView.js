@@ -1,5 +1,5 @@
 import React from "react";
-function TableView({tables, handleFinish, loadTables}) {
+function TableView({tables, handleFinish}) {
 
 
     const tablesList = tables.map((table, index) => {

@@ -56,6 +56,7 @@ async function update(req,res,next) {
         ...table,
         reservation_id: reservation.reservation_id
     }
+    
     const updatedTable = await service.update(update)
     res.status(200).json({data : updatedTable})
 }
@@ -108,14 +109,41 @@ async function checkIfNotOccupied(req,res,next) {
 
 async function finishReservation(req,res,next){
     const {table} = res.locals;
-    const update = {
+    const reservation = await reservationService.read(table.reservation_id)
+    const updateForTable = {
         ...table,
         reservation_id: null
     }
-    const updatedTable = await service.update(update);
+
+    const updateForReservation = {
+        ...reservation,
+        status: "finished"
+    }
+
+    await reservationService.update(updateForReservation)
+    const updatedTable = await service.update(updateForTable);
     res.status(200).json({data: updatedTable});
 }
 
+async function updateReservationStatus(req,res,next) {
+    const {reservation} = res.locals;
+    if (reservation.status === "booked") {
+        const update = {
+            ...reservation,
+            status: "seated"
+        }
+        await reservationService.update(update);
+        next();
+    } 
+}
+
+async function checkStatusSeated(req,res,next) {
+    const {reservation} = res.locals
+    if (reservation.status === "booked") {
+        return next();
+    }
+    next({status: 400, message: "reservation already seated"})
+}
 
 module.exports ={
     list: asyncErrorBoundary(list),
@@ -132,6 +160,8 @@ module.exports ={
         checkReservationExists,
         checkTableSize,
         checkIfOccupied,
+        checkStatusSeated,
+        asyncErrorBoundary(updateReservationStatus),
         asyncErrorBoundary(update),
     ],
     finishReservation: [

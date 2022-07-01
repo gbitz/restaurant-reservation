@@ -41,11 +41,35 @@ function checkPeopleType(req,res,next) {
   next({status : 400, message: `people must be type 'number'`})
 }
 
+function checkValidNewStatus(req, res, next) {
+  const {status} = req.body.data;
+  if (status === "booked"){
+    return next();
+  }
+  next({status: 400, message: `status must start as 'booked' and not '${status}'`})
+}
+
+function checkValidStatus(req,res,next) {
+  const {status} = req.body.data;
+  if (status === "booked" || status === "seated" || status === "finished") {
+    return next();
+  }
+  next({status: 400, message: `status '${status}' is unknown`})
+}
+
+function checkStatusFinished(req,res,next) {
+  const {status} = res.locals.reservation;
+  status
+  if (status === "booked" || status === "seated") {
+    return next();
+  }
+  next({status: 400, message: `'finished' status cannot be updated`})
+
+}
+
 function checkDayOfWeek(req,res,next) {
   const {reservation_date} = req.body.data;
   const testDate = new Date(reservation_date)
-  // console.log(testDate)
-  // console.log(testDate.getDay())
   if (testDate.getDay() != "1") {
     return next();
   }
@@ -56,7 +80,6 @@ function checkFutureDate(req,res,next) {
   const today = new Date();
   const {reservation_date, reservation_time} = req.body.data;
   const testDate =  new Date(`${reservation_date} ${reservation_time}`)
-  // console.log((today.getTime() < testDate.getTime()))
   if (today.getTime() < testDate.getTime()) {
     return next();
   }
@@ -68,7 +91,6 @@ function checkValidTime(req,res,next) {
   const testTime = reservation_time;
   const openTime = "10:30";
   const closeTime = "21:30";
-  // console.log(testTime);
   if (testTime >= openTime && testTime <= closeTime){
     return next();
   }
@@ -103,7 +125,7 @@ async function reservationExists(req,res,next) {
     res.locals.reservation = foundReservation;
     return next();
   }
-  next({status: 404, message: `Reservation Not Found in Records`})
+  next({status: 404, message: `Reservation ${req.params.reservation_id} Not Found in Records`})
 }
 
 
@@ -126,7 +148,6 @@ async function updateStatus(req,res,next) {
     status: status
   }
   const data = await service.update(updateReservation)
-  console.log(data)
   res.status(200).json({data})
 }
 
@@ -139,6 +160,8 @@ module.exports = {
     bodyDataHas("reservation_date"),
     bodyDataHas("reservation_time"),
     bodyDataHas("people"),
+    bodyDataHas("status"),
+    checkValidNewStatus,
     checkDateType,
     checkTimeType,
     checkPeopleType,
@@ -153,6 +176,8 @@ module.exports = {
   ],
   updateStatus: [
     reservationExists,
+    checkValidStatus,
+    checkStatusFinished,
     asyncErrorBoundary(updateStatus)
   ]
 };

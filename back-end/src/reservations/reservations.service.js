@@ -3,6 +3,7 @@ const knex = require("../db/connection")
 function list(reservation_date) {
     return knex("reservations")
     .select("*")
+    .whereNot({status : "finished"})
     .where({ reservation_date })
     .orderBy("reservation_time")
 }

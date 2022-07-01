@@ -1,5 +1,5 @@
 import React, { useEffect, useState,  } from "react";
-import { listReservations, listTables, finishReservation } from "../utils/api";
+import { listReservations, listTables, finishReservation, updateStatus } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 // import queryString from "query-string"
 import DateSelector from "./DateSelector";
@@ -64,11 +64,14 @@ function Dashboard() {
     return () => abortController.abort();
   }
 
-  async function handleFinish(table_id) {
+  async function handleFinish(table_id, reservation_id) {
     const abortController = new AbortController();
+    const status = "finished";
         try {
           if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             await finishReservation(table_id, abortController.signal);
+            await updateStatus(reservation_id, status, abortController.signal);
+            await loadDashboard();
             await loadTables();
             // window.location.reload();
           }

@@ -121,14 +121,11 @@ async function read(req, res) {
 async function updateStatus(req,res,next) {
   const {reservation} = res.locals;
   const {status} = req.body.data;
-  console.log(reservation)
   const updateReservation = {
     ...reservation,
     status: status
   }
-  console.log(updateReservation)
   const data = await service.update(updateReservation)
-  console.log(data)
   res.status(200).json({data})
 }
 

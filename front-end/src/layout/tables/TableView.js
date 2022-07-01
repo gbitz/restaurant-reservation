@@ -16,7 +16,7 @@ function TableView({tables, handleFinish}) {
                         <button
                              data-table-id-finish={table.table_id}  
                              className="btn btn-danger" 
-                             onClick={()=> {handleFinish(table.table_id)}}>
+                             onClick={()=> {handleFinish(table.table_id, table.reservation_id)}}>
                             Finish
                         </button>
                       </td>

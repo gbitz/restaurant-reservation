@@ -43,7 +43,7 @@ function checkPeopleType(req,res,next) {
 
 function checkValidNewStatus(req, res, next) {
   const {status} = req.body.data;
-  if (status === "booked"){
+  if (status === "booked" || !status){
     return next();
   }
   next({status: 400, message: `status must start as 'booked' and not '${status}'`})
@@ -160,7 +160,6 @@ module.exports = {
     bodyDataHas("reservation_date"),
     bodyDataHas("reservation_time"),
     bodyDataHas("people"),
-    bodyDataHas("status"),
     checkValidNewStatus,
     checkDateType,
     checkTimeType,

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams, useHistory} from "react-router-dom";
 import ErrorAlert from "../ErrorAlert";
-import {readReservation, listTables, seatReservation, updateStatus} from "../../utils/api";
+import {readReservation, listTables, seatReservation} from "../../utils/api";
 import TableView from "../tables/TableView";
 import SeatForm from "./SeatForm";
 
@@ -63,9 +63,8 @@ function SeatReservation(){
         const abortController = new AbortController();
         const table_id = Number(form.table_id);
         const {reservation_id} = reservation;
-        const status = "seated"
         try {
-            await updateStatus(reservation_id, status, abortController.signal);
+            // await updateStatus(reservation_id, status, abortController.signal);
             await seatReservation(reservation_id, table_id, abortController.signal);
             history.push("/dashboard");
         } catch (error) {

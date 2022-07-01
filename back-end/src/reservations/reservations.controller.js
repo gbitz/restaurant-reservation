@@ -98,12 +98,18 @@ function checkValidTime(req,res,next) {
 }
 
 /**
- * List handler for reservation resources
+ * List handler for reservation resources depending on query params
  */
 async function list(req, res) {
-  const reservation_date = req.query.date;
-  const data = await service.list(reservation_date);
-  res.json({ data });
+  const {date, mobile_number} = req.query;
+  if (mobile_number) {
+    const data =  await service.search(mobile_number)
+    res.json({ data });
+  } else if (date) {
+    const data = await service.list(date);
+    res.json({ data });
+  }
+
 }
 
 /**

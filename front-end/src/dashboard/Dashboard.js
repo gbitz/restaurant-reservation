@@ -71,7 +71,7 @@ function Dashboard() {
         try {
           if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             await finishReservation(table_id, abortController.signal);
-            await updateStatus(reservation_id, status, abortController.signal);
+            // await updateStatus(reservation_i, dstatus, abortController.signal);
             await loadDashboard();
             await loadTables();
           }

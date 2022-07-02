@@ -1,5 +1,5 @@
 import React, { useEffect, useState,  } from "react";
-import { listReservations, listTables, finishReservation } from "../utils/api";
+import { listReservations, listTables, finishReservation, updateStatus } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 // import queryString from "query-string"
 import DateSelector from "./DateSelector";
@@ -70,7 +70,7 @@ function Dashboard() {
         try {
           if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             await finishReservation(table_id, abortController.signal);
-            // await updateStatus(reservation_i, dstatus, abortController.signal);
+            // await updateStatus(reservation_id, status, abortController.signal);
             await loadDashboard();
             await loadTables();
           }
@@ -81,6 +81,22 @@ function Dashboard() {
             abortController.abort();
         };
   }
+
+  async function cancelReservation(reservation_id) {
+    const abortController = new AbortController();
+    try {
+      if (window.confirm("Do you want to cancel this reservation? This cannot be undone.")) {
+        await updateStatus(reservation_id, "cancelled", abortController.signal);
+        await loadDashboard();
+        await loadTables();
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {setError(error)}
+    }
+    return () => {
+      abortController.abort();
+    };
+  }
   
   return (
     <main>
@@ -90,7 +106,7 @@ function Dashboard() {
       </div>
       <ErrorAlert error={error} />
       <DateSelector date={date} setDate={setDate} history={history} />
-      <ReservationView reservations={reservations} />
+      <ReservationView reservations={reservations} cancelReservation={cancelReservation} />
       <TableView tables={tables} setError={setError} handleFinish={handleFinish} loadTables={loadTables}/>
       {/* {JSON.stringify(reservations)} */}
     </main>

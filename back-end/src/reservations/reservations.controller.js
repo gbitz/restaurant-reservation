@@ -51,7 +51,7 @@ function checkValidNewStatus(req, res, next) {
 
 function checkValidStatus(req,res,next) {
   const {status} = req.body.data;
-  if (status === "booked" || status === "seated" || status === "finished") {
+  if (status === "booked" || status === "seated" || status === "finished" || status ==="cancelled") {
     return next();
   }
   next({status: 400, message: `status '${status}' is unknown`})

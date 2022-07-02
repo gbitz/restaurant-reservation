@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-function ReservationView({reservations}) {
+function ReservationView({reservations, cancelReservation}) {
     const reservationList = reservations.map((reservation, index) => {
-        if (reservation.status !== "finished") {
+        if (reservation.status !== "finished" && reservation.status !== "cancelled") {
             return (
                 <tr key={reservation.reservation_id}>
                     <th scope="row">{reservation.reservation_id}</th>
@@ -20,11 +20,16 @@ function ReservationView({reservations}) {
                             <Link  className="btn btn-primary" to={`/reservations/${reservation.reservation_id}/seat`}>
                                 Seat
                             </Link>
-                            
-                            )
-                            :
-                            null                        
+                            ): null                        
                         }
+                    </td>
+                    <td>
+                        <Link  className="btn btn-info" to={`/reservations/${reservation.reservation_id}/edit`}>
+                            Edit
+                        </Link>
+                    </td>
+                    <td>
+                        <button className="btn btn-danger" data-reservation-id-cancel={reservation.reservation_id} onClick={()=>cancelReservation(reservation.reservation_id)}>Cancel</button>
                     </td>
                 </tr>
             )
@@ -46,6 +51,8 @@ function ReservationView({reservations}) {
                         <th scope="col">Time</th>
                         <th scope="col">Status</th>
                         <th scope="col">Find Table</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Cancel</th>
                     </tr>
                 </thead>
 

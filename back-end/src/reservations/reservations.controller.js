@@ -157,6 +157,19 @@ async function updateStatus(req,res,next) {
   res.status(200).json({data})
 }
 
+/**
+ * Updates an existing reservation
+ */
+async function update(req,res,next) {
+  const {reservation} = res.locals;
+  const updatedReservation = {
+    ...reservation,
+    ...req.body.data
+  }
+  const data = await service.update(updatedReservation)
+  res.status(200).json({data})
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -184,5 +197,22 @@ module.exports = {
     checkValidStatus,
     checkStatusFinished,
     asyncErrorBoundary(updateStatus)
+  ],
+  update: [
+    bodyDataHas("first_name"),
+    bodyDataHas("last_name"),
+    bodyDataHas("mobile_number"),
+    bodyDataHas("reservation_date"),
+    bodyDataHas("reservation_time"),
+    bodyDataHas("people"),
+    reservationExists,
+    checkDateType,
+    checkTimeType,
+    checkValidTime,
+    checkDayOfWeek,
+    checkFutureDate,
+    checkPeopleType,
+    asyncErrorBoundary(update)
+
   ]
 };

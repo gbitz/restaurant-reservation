@@ -165,6 +165,17 @@ export async function updateStatus(reservation_id, status, signal) {
     signal,
   }
   return await fetchJson(url, options, {})
-
+}
+/**
+ * Searches the reservations table based on mobile_number params
+ */
+export async function searchByMobileNumber(mobile_number, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations?mobile_number=${mobile_number}`);
+  const options = {
+    method: "GET",
+    headers,
+    signal,
+  };
+  return await fetchJson(url, options, [])
 }
 

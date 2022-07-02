@@ -5,6 +5,7 @@ import NotFound from "./NotFound";
 import NewReservation from "./reservations/NewReservation";
 import NewTable from "./tables/NewTable";
 import SeatReservation from "./reservations/SeatReservation"
+import SearchReservation from "./reservations/SearchReservation";
 
  
 /**
@@ -40,6 +41,9 @@ function Routes() {
       </Route>
       <Route path="/reservations/:reservation_id/seat">
         <SeatReservation />
+      </Route>
+      <Route exact={true} path="/search">
+        <SearchReservation />
       </Route>
       <Route>
         <NotFound />

@@ -64,7 +64,6 @@ function SeatReservation(){
         const table_id = Number(form.table_id);
         const {reservation_id} = reservation;
         try {
-            // await updateStatus(reservation_id, status, abortController.signal);
             await seatReservation(reservation_id, table_id, abortController.signal);
             history.push("/dashboard");
         } catch (error) {

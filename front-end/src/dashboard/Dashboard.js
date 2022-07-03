@@ -1,7 +1,6 @@
 import React, { useEffect, useState,  } from "react";
 import { listReservations, listTables, finishReservation, updateStatus } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-// import queryString from "query-string"
 import DateSelector from "./DateSelector";
 import useQuery from "../utils/useQuery"
 import {useHistory} from "react-router-dom"
@@ -70,7 +69,6 @@ function Dashboard() {
         try {
           if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             await finishReservation(table_id, abortController.signal);
-            // await updateStatus(reservation_id, status, abortController.signal);
             await loadDashboard();
             await loadTables();
           }
@@ -108,7 +106,6 @@ function Dashboard() {
       <DateSelector date={date} setDate={setDate} history={history} />
       <ReservationView reservations={reservations} cancelReservation={cancelReservation} />
       <TableView tables={tables} setError={setError} handleFinish={handleFinish} loadTables={loadTables}/>
-      {/* {JSON.stringify(reservations)} */}
     </main>
   );
 }

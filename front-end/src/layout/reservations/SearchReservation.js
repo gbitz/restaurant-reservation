@@ -7,21 +7,11 @@ function SearchReservation() {
     const initialValues = {
         mobile_number: ""
     }
-    // const query = useQuery();
-    // const [mobileNumber, setMobileNumber] = useState("");
+
     const [form, setForm] =  useState({...initialValues});
     const [reservations, setReservations] = useState([]);
     const [searchMessage, setSearchMessage] = useState("")
     const [error, setError] = useState(null)
-
-
-    // useEffect(() => {
-    //     const mobileNumberCheck = async () => {
-    //       const mobileNumberQuery = query.get("mobile_number");
-    //       if (mobileNumberQuery) {setMobileNumber(mobileNumberQuery);}
-    //     }
-    //     mobileNumberCheck();
-    // }, [query, mobileNumber]);
 
     const changeHandler = ({target}) => {
         const {value} = target;
@@ -54,7 +44,6 @@ function SearchReservation() {
             abortController.abort();
         };
     }
-
 
     return (
         <div>

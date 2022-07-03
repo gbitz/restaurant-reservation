@@ -9,25 +9,18 @@ function EditReservation() {
 
 
     const [reservation, setReservation] = useState({});
-    const [reservationId, setReservationId] = useState("")
-    const params = useParams();
+    const {reservation_id} = useParams();
     const [form, setForm] = useState({});
     const history = useHistory();
     const [error, setError] =  useState(null);
 
-    useEffect(() => {
-        const reservationQueryCheck = async () => {
-            setReservationId(params.reservation_id);
-        }
-        reservationQueryCheck();
-      }, [params.reservation_id])
+
 
     useEffect(() => {
         const loadPreviousReservationValues = async () => {
             const abortController = new AbortController();
-            // const reservationId = query.get("reservation_id")
             try {
-                const foundReservation = await readReservation(reservationId, abortController.signal);
+                const foundReservation = await readReservation(reservation_id, abortController.signal);
                 setReservation({
                     ...foundReservation,
                     reservation_date : formatAsDate(foundReservation.reservation_date),
@@ -42,7 +35,7 @@ function EditReservation() {
         }
         loadPreviousReservationValues();
 
-    }, [reservationId]);
+    }, [reservation_id]);
 
     async function submitHandler(event)  {
         event.preventDefault();

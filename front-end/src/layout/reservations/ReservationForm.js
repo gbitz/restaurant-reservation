@@ -40,7 +40,6 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     name="mobile_number"
                     id="mobile_number"
                     type="tel"
-                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     onChange={changeHandler}
                     placeholder="999-999-9999"
                     defaultValue={reservationDefaultValues.mobile_number}

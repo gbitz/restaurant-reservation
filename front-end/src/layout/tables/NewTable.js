@@ -23,7 +23,6 @@ function NewTable() {
         async function submitTable() {
             try {
                 await createTable(newTable, abortController.signal);
-                // console.log(response);
                 setTableForm({...intialTableValues});
                 history.push("/dashboard")
             } catch (error) {

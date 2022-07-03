@@ -17,7 +17,6 @@ import EditReservation from "./reservations/EditReservation"
  */
 function Routes() {
 
-  // const [date, setDate] = useState(today());
 
   return (
     <Switch>

@@ -6,7 +6,7 @@ import NewReservation from "./reservations/NewReservation";
 import NewTable from "./tables/NewTable";
 import SeatReservation from "./reservations/SeatReservation"
 import SearchReservation from "./reservations/SearchReservation";
-
+import EditReservation from "./reservations/EditReservation"
  
 /**
  * Defines all the routes for the application.
@@ -33,9 +33,6 @@ function Routes() {
       <Route exact={true} path="/reservations/new">
         <NewReservation />
       </Route>
-      {/* <Route exact={true} path="/tables">
-        <Redirect to={"/dashboard"}/>
-      </Route> */}
       <Route exact={true} path="/tables/new">
         <NewTable />
       </Route>
@@ -44,6 +41,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/search">
         <SearchReservation />
+      </Route>
+      <Route path="/reservations/:reservation_id/edit">
+        <EditReservation />
       </Route>
       <Route>
         <NotFound />

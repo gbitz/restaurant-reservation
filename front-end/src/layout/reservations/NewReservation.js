@@ -55,6 +55,7 @@ function NewReservation() {
       setReservationForm({...initialReservationValues})
       history.goBack();
     }
+    
     return(
         <div>
           <div>

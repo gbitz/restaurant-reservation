@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
-import useQuery from "../../utils/useQuery";
-import {searchByMobileNumber, listReservations} from "../../utils/api";
+import React, {useState} from "react";
+import { listReservations} from "../../utils/api";
 import ErrorAlert from "../ErrorAlert";
 import ReservationView from "./ReservationView";
 

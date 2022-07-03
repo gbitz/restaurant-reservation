@@ -213,6 +213,5 @@ module.exports = {
     checkFutureDate,
     checkPeopleType,
     asyncErrorBoundary(update)
-
   ]
 };

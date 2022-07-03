@@ -161,7 +161,7 @@ export async function updateStatus(reservation_id, status, signal) {
   const options = {
     method: "PUT",
     headers,
-    body: JSON.stringify({data: {status: status}}),
+    body: JSON.stringify({data: {status:status}}),
     signal,
   }
   return await fetchJson(url, options, {})
@@ -179,3 +179,16 @@ export async function searchByMobileNumber(mobile_number, signal) {
   return await fetchJson(url, options, [])
 }
 
+/**
+ * Edits an existing reservation
+ */
+export async function editReservation(reservation, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations/${reservation.reservation_id}`);
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({data: reservation}),
+    signal,
+  }
+  return await fetchJson(url, options, {})
+}

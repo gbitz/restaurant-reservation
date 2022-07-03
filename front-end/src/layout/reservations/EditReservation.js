@@ -28,17 +28,10 @@ function EditReservation() {
             // const reservationId = query.get("reservation_id")
             try {
                 const foundReservation = await readReservation(reservationId, abortController.signal);
-                
                 setReservation({
                     ...foundReservation,
                     reservation_date : formatAsDate(foundReservation.reservation_date),
                     reservation_time : formatAsTime(foundReservation.reservation_time)
-                    // first_name: reservation.first_name,
-                    // last_name: reservation.last_name,
-                    // mobile_number: reservation.mobile_number,
-                    // reservation_date: reservation.reservation_date,
-                    // reservation_time: reservation.reservation_time,
-                    // people: reservation.people,
                 })
             } catch (error) {
                 if(error.name !=="AbortError") {setError(error)}
@@ -51,32 +44,32 @@ function EditReservation() {
 
     }, [reservationId]);
 
-    const submitHandler = async (event) => {
+    async function submitHandler(event)  {
         event.preventDefault();
-       
         const update = {
             ...reservation,
             ...form
         }
         const abortController = new AbortController();
-        console.log(update)
         try {
             await editReservation(update, abortController.signal);
-            history.push(`/dashboard?date=${update.reservation_date}`)      
+            history.push(`/dashboard?date=${formatAsDate(update.reservation_date)}`);
         } catch (error) {
             if(error.name !=="AbortError") {setError(error)}
         }
+
         return () => {
             abortController.abort();
         };
     }
 
-    const cancelHandler = async (event) => {
+    const cancelHandler = (event) => {
         event.preventDefault()
-        history.push(`/dashboard?date=${reservation.reservation_date}`)      
+        // history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)      
+        history.goBack()
     }
 
-    const changeHandler =  ({target}) => {
+    const changeHandler = ({target}) => {
         const {type, value, name} = target;
         if (value) {
             setForm({
@@ -87,7 +80,6 @@ function EditReservation() {
                 ...(type === "text" || type === "tel") && {[name]: value},
               });
         }
-
       }
 
     return (

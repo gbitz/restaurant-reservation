@@ -77,7 +77,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                     id="people"
                     type="number"
                     min={1}
-                    // placeholder={1}
+                    placeholder={1}
                     defaultValue={reservation.people}
                     onChange={changeHandler}
                 />

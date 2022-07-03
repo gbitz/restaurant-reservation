@@ -2,9 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom"
 
 function ReservationView({reservations, cancelReservation}) {
-    const reservationList = reservations.map((reservation, index) => {
-        if (reservation.status !== "finished" && reservation.status !== "cancelled") {
-            return (
+
+    const reservationList = reservations.map((reservation, index) => 
+            ((reservation.status !== "finished" && reservation.status !== "cancelled") &&
                 <tr key={reservation.reservation_id}>
                     <th scope="row">{reservation.reservation_id}</th>
                     <td>{reservation.first_name}</td>   
@@ -37,9 +37,8 @@ function ReservationView({reservations, cancelReservation}) {
                     </td>
                 </tr>
             )
-        }
 
-    });
+    );
     return(
         <div>
             <table className="table table-striped">

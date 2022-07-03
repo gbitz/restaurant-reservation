@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import ErrorAlert from "../ErrorAlert"
-import EditForm from "./EditForm"
 import { editReservation, readReservation,} from "../../utils/api";
 import {formatAsTime, formatAsDate} from "../../utils/date-time";
 import ReservationForm from "./ReservationForm";

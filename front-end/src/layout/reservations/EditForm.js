@@ -83,7 +83,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                 />
                 
                 </div>
-                <button type="button" className="btn btn-secondary mr-2" onClick={cancelHandler}>cancel</button>
+                <button type="button" className="btn btn-secondary mr-2" onClick={cancelHandler}>Cancel</button>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
 

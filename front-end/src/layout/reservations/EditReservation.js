@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import useQuery from "../../utils/useQuery"
 import {useHistory, useParams} from "react-router-dom";
 import ErrorAlert from "../ErrorAlert"
 import EditForm from "./EditForm"
@@ -11,7 +10,6 @@ function EditReservation() {
 
     const [reservation, setReservation] = useState({});
     const [reservationId, setReservationId] = useState("")
-    const query = useQuery();
     const params = useParams();
     const [form, setForm] = useState({});
     const history = useHistory();
@@ -22,7 +20,7 @@ function EditReservation() {
             setReservationId(params.reservation_id);
         }
         reservationQueryCheck();
-      }, [])
+      }, [params.reservation_id])
 
     useEffect(() => {
         const loadPreviousReservationValues = async () => {

@@ -59,6 +59,7 @@ function EditReservation() {
             ...form
         }
         const abortController = new AbortController();
+        console.log(update)
         try {
             await editReservation(update, abortController.signal);
             history.push(`/dashboard?date=${update.reservation_date}`)      
@@ -71,6 +72,7 @@ function EditReservation() {
     }
 
     const cancelHandler = async (event) => {
+        event.preventDefault()
         history.push(`/dashboard?date=${reservation.reservation_date}`)      
     }
 

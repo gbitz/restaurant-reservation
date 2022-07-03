@@ -16,7 +16,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                     id="first_name"
                     type="text"
                     onChange={changeHandler}
-                    placeholder={reservation.first_name}
+                    defaultValue={reservation.first_name}
                 />
                 
                 <label>
@@ -28,7 +28,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                     id="last_name"
                     type="text"
                     onChange={changeHandler}
-                    placeholder={reservation.last_name}
+                    defaultValue={reservation.last_name}
                 />
                
                 <label>
@@ -41,7 +41,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                     type="tel"
                     // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     onChange={changeHandler}
-                    placeholder={reservation.mobile_number}
+                    defaultValue={reservation.mobile_number}
                 />
                 
                 <label>
@@ -77,7 +77,7 @@ function EditForm({cancelHandler, changeHandler, submitFormHandler, reservation}
                     id="people"
                     type="number"
                     min={1}
-                    placeholder={1}
+                    // placeholder={1}
                     defaultValue={reservation.people}
                     onChange={changeHandler}
                 />

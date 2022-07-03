@@ -24,9 +24,13 @@ function ReservationView({reservations, cancelReservation}) {
                         }
                     </td>
                     <td>
-                        <Link  className="btn btn-info" to={`/reservations/${reservation.reservation_id}/edit`}>
-                            Edit
-                        </Link>
+                        {
+                            reservation.status === "booked" ? (
+                                <Link  className="btn btn-info" to={`/reservations/${reservation.reservation_id}/edit`}>
+                                    Edit
+                                </Link>
+                            ):null
+                        }
                     </td>
                     <td>
                         <button className="btn btn-danger" data-reservation-id-cancel={reservation.reservation_id} onClick={()=>cancelReservation(reservation.reservation_id)}>Cancel</button>

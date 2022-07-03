@@ -1,8 +1,5 @@
 const service = require("./reservations.service");
-const tableService= require("../tables/tables.service")
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-
-
 
 // Validation for correct reservation values
 function bodyDataHas(propertyName) {
@@ -116,7 +113,6 @@ async function list(req, res) {
  * Create handler for reservation resources
 */
 async function create(req, res) {
-  // const {data : {first_name, last_name, mobile_number, reservation_date, reservation_time, people} = {} } = req.body
   const reservation = await service.create(req.body.data);
   res.status(201).json({data: reservation})
 }
@@ -189,11 +185,11 @@ module.exports = {
     asyncErrorBoundary(create)
   ],
   read: [
-    reservationExists,
+    asyncErrorBoundary(reservationExists),
     asyncErrorBoundary(read)
   ],
   updateStatus: [
-    reservationExists,
+    asyncErrorBoundary(reservationExists),
     checkValidStatus,
     checkStatusFinished,
     asyncErrorBoundary(updateStatus)
@@ -205,7 +201,7 @@ module.exports = {
     bodyDataHas("reservation_date"),
     bodyDataHas("reservation_time"),
     bodyDataHas("people"),
-    reservationExists,
+    asyncErrorBoundary(reservationExists),
     checkDateType,
     checkTimeType,
     checkValidTime,

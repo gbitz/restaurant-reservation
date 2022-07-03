@@ -156,8 +156,8 @@ module.exports ={
     ],
     update: [
         bodyDataHas("reservation_id"),
-        checkTableExists,
-        checkReservationExists,
+        asyncErrorBoundary(checkTableExists),
+        asyncErrorBoundary(checkReservationExists),
         checkTableSize,
         checkIfOccupied,
         checkStatusSeated,
@@ -165,7 +165,7 @@ module.exports ={
         asyncErrorBoundary(update),
     ],
     finishReservation: [
-        checkTableExists,
+        asyncErrorBoundary(checkTableExists),
         checkIfNotOccupied,
         asyncErrorBoundary(finishReservation)
     ]

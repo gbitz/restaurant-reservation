@@ -1,20 +1,17 @@
 import React, {useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import ErrorAlert from "../ErrorAlert"
-import { editReservation, readReservation,} from "../../utils/api";
+import { editReservation, readReservation} from "../../utils/api";
 import {formatAsTime, formatAsDate} from "../../utils/date-time";
 import ReservationForm from "./ReservationForm";
 
 function EditReservation() {
-
 
     const [reservation, setReservation] = useState({});
     const {reservation_id} = useParams();
     const [form, setForm] = useState({});
     const history = useHistory();
     const [error, setError] =  useState(null);
-
-
 
     useEffect(() => {
         const loadPreviousReservationValues = async () => {
@@ -24,7 +21,8 @@ function EditReservation() {
                 setReservation({
                     ...foundReservation,
                     reservation_date : formatAsDate(foundReservation.reservation_date),
-                    reservation_time : formatAsTime(foundReservation.reservation_time)
+                    reservation_time : formatAsTime(foundReservation.reservation_time),
+                    people: Number(foundReservation.people)
                 })
             } catch (error) {
                 if(error.name !=="AbortError") {setError(error)}
@@ -34,7 +32,6 @@ function EditReservation() {
             };
         }
         loadPreviousReservationValues();
-
     }, [reservation_id]);
 
     async function submitHandler(event)  {
@@ -58,8 +55,7 @@ function EditReservation() {
 
     const cancelHandler = (event) => {
         event.preventDefault()
-        history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)      
-        // history.goBack()
+        history.goBack()
     }
 
     const changeHandler = ({target}) => {
@@ -79,7 +75,6 @@ function EditReservation() {
         <div>
             <h1>Edit Reservation</h1>
             <ErrorAlert error={error}/>
-            {/* <EditForm cancelHandler={cancelHandler} changeHandler={changeHandler} submitFormHandler={submitHandler} reservationDefaultValues={reservation}/> */}
             <ReservationForm cancelHandler={cancelHandler} changeHandler={changeHandler} submitFormHandler={submitHandler} reservationDefaultValues={reservation} />
         </div>
     )

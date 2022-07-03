@@ -1,9 +1,8 @@
 import React from "react";
 
-function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reservationForm}) {
+function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reservationDefaultValues}) {
     return (
         <div>
-            <h1>New Reservation</h1>
             
             <form onSubmit={submitFormHandler}>
                 <div className="form-group">
@@ -17,6 +16,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     type="text"
                     onChange={changeHandler}
                     placeholder="First Name"
+                    defaultValue={reservationDefaultValues.first_name}
                 />
                 
                 <label>
@@ -29,6 +29,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     type="text"
                     onChange={changeHandler}
                     placeholder="Last Name"
+                    defaultValue={reservationDefaultValues.last_name}
                 />
                
                 <label>
@@ -42,6 +43,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     onChange={changeHandler}
                     placeholder="999-999-9999"
+                    defaultValue={reservationDefaultValues.mobile_number}
                 />
                 
                 <label>
@@ -52,6 +54,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     name="reservation_date"
                     id="reservation_date"
                     type="date"
+                    defaultValue={reservationDefaultValues.reservation_date}
                     onChange={changeHandler}
                 />
 
@@ -63,6 +66,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     name="reservation_time"
                     id="reservation_time"
                     type="time"
+                    defaultValue={reservationDefaultValues.reservation_time}
                     onChange={changeHandler}
                 />
 
@@ -76,6 +80,7 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     type="number"
                     min={1}
                     placeholder={1}
+                    defaultValue={reservationDefaultValues.people}
                     onChange={changeHandler}
                 />
                 

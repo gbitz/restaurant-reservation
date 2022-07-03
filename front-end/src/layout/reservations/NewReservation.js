@@ -59,7 +59,8 @@ function NewReservation() {
     return(
         <div>
           <div>
-            <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationForm={reservationForm} />
+            <h1>New Reservation</h1>
+            <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationDefaultValues={reservationForm} />
           </div>
           <div>
             <ErrorAlert error={error} />

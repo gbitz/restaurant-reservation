@@ -4,6 +4,7 @@ import ErrorAlert from "../ErrorAlert"
 import EditForm from "./EditForm"
 import { editReservation, readReservation,} from "../../utils/api";
 import {formatAsTime, formatAsDate} from "../../utils/date-time";
+import ReservationForm from "./ReservationForm";
 
 function EditReservation() {
 
@@ -65,8 +66,8 @@ function EditReservation() {
 
     const cancelHandler = (event) => {
         event.preventDefault()
-        // history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)      
-        history.goBack()
+        history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)      
+        // history.goBack()
     }
 
     const changeHandler = ({target}) => {
@@ -84,8 +85,10 @@ function EditReservation() {
 
     return (
         <div>
+            <h1>Edit Reservation</h1>
             <ErrorAlert error={error}/>
-            <EditForm cancelHandler={cancelHandler} changeHandler={changeHandler} submitFormHandler={submitHandler} reservation={reservation}/>
+            {/* <EditForm cancelHandler={cancelHandler} changeHandler={changeHandler} submitFormHandler={submitHandler} reservationDefaultValues={reservation}/> */}
+            <ReservationForm cancelHandler={cancelHandler} changeHandler={changeHandler} submitFormHandler={submitHandler} reservationDefaultValues={reservation} />
         </div>
     )
 }

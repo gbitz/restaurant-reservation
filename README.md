@@ -1,6 +1,6 @@
 # Restaurant Reservation Scheduler
 
-Live Deployment: [https://reservation-scheduler-app.herokuapp.com/dashboard]
+Live Deployment: https://reservation-scheduler-app.herokuapp.com/dashboard
 
 ## Application Uses
 

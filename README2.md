@@ -49,6 +49,13 @@ Displays matching reservations based on phone number.  Partial phone numbers wil
 | `PUT/:table:id/seat`  |     `update`          | Changes table entry information         |
 |`DELETE/:table:id/seat`| `finishReservation`   | Removes Reservation from table          |
 
+| Reservations          |     `body`            | capacity `integer`, table_name `string` |
+| --------------------- | ----------------------|-----------------------------------------|
+| `GET/ `               |     `list`            | Returns list of reservations            |
+| `POST/ `              |        `create`       | Creates a new Reservation record        |
+|`GET/:reservation_id`  |     `read`            | Returns reservation information based on ID  |
+|`PUT/:reservation_id`  | `update`              | Updates reservation information based on ID  |
+
 ### Knex
 
 Run `npx knex` commands from within the `back-end` folder, which is where the `knexfile.js` file is located.

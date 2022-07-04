@@ -47,10 +47,10 @@ function SearchReservation() {
 
     return (
         <div>
-            <div>
-                <h1>Search By Phone Number</h1>
+            <div >
+                <h1 className="text-center">Search By Phone Number</h1>
                 <ErrorAlert error={error} />
-                <form onSubmit={submitHandler}>
+                <form className="d-flex flex-column container fluid justify-content-center col-3" onSubmit={submitHandler}>
                     <div className="form-group">
                     <input
                         className="form-control"

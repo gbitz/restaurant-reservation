@@ -3,9 +3,9 @@ import React from "react";
 function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm}) {
     return (
         <div>
-            <h1>Create Table</h1>
+            <h1 className="text-center">Create Table</h1>
             
-            <form onSubmit={submitFormHandler}>
+            <form className="d-flex flex-column container fluid justify-content-center col-3" onSubmit={submitFormHandler}>
                 <div className="form-group">
                 <label>
                     <h3>Table Name:</h3>
@@ -17,7 +17,7 @@ function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm})
                     type="text"
                     min={2}
                     onChange={changeHandler}
-                    placeholder="Table Name"
+                    placeholder="Must be 2 Characters"
                     required
                 />
                 
@@ -36,8 +36,8 @@ function TableForm({cancelHandler, changeHandler, submitFormHandler, tableForm})
                 />
            
                 </div>
-                <button type="button" className="btn btn-secondary mr-2" onClick={cancelHandler}>Cancel</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="button" className="btn btn-secondary m-2" onClick={cancelHandler}>Cancel</button>
+                <button type="submit" className="btn btn-primary m-2">Submit</button>
             </form>
 
         </div>

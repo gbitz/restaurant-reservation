@@ -9,16 +9,16 @@ function SeatForm({tables, reservation, changeHandler, cancelHandler, submitHand
     })
 
     return (
-        <form onSubmit={submitHandler}>
-            <div className="formGroup">
-                <label htmlFor="table_id">Select Table</label>
+        <form className="d-flex flex-column container fluid justify-content-center col-3" onSubmit={submitHandler}>
+            <div className="form-group">
+                <h1 className="h1 text-center">Select Table</h1>
                 <select className="form-control" name="table_id" onChange={changeHandler}>
                     <option>Choose a table...</option>
                     {tablesMenu}
                 </select>
             </div>
-            <button type="button" className="btn btn-secondary mr-2" onClick={cancelHandler}>Cancel</button>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary m-2">Submit</button>
+            <button type="button" className="btn btn-secondary m-2" onClick={cancelHandler}>Cancel</button>
         </form>
     )
 }

@@ -4,11 +4,11 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
     return (
         <div>
             
-            <form onSubmit={submitFormHandler}>
-                <div className="form-group">
+            <form className="d-flex flex-column container fluid justify-content-center col-4" onSubmit={submitFormHandler}>
+                <div className="form-group d-flex flex-column">
                 <label>
-                    <h3>First Name</h3>
-                </label>
+                    <h5>First Name</h5>
+                
                 <input
                     className="form-control"
                     name="first_name"
@@ -18,10 +18,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     placeholder="First Name"
                     defaultValue={reservationDefaultValues.first_name}
                 />
-                
+                </label>
                 <label>
-                    <h3>Last Name</h3>    
-                </label>   
+                    <h5>Last Name</h5>    
+                  
                 <input
                     className="form-control"
                     name="last_name"
@@ -31,10 +31,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     placeholder="Last Name"
                     defaultValue={reservationDefaultValues.last_name}
                 />
-               
+                </label> 
                 <label>
-                    <h3>Mobile Number</h3>    
-                </label>   
+                    <h5>Mobile Number</h5>    
+                  
                 <input
                     className="form-control"
                     name="mobile_number"
@@ -44,10 +44,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     placeholder="999-999-9999"
                     defaultValue={reservationDefaultValues.mobile_number}
                 />
-                
+                </label> 
                 <label>
-                    <h3>Date of Reservation</h3>    
-                </label>   
+                    <h5>Date of Reservation</h5>    
+                
                 <input
                     className="form-control"
                     name="reservation_date"
@@ -56,10 +56,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     defaultValue={reservationDefaultValues.reservation_date}
                     onChange={changeHandler}
                 />
-
-                <label>
-                    <h3>Time of Reservation</h3>    
                 </label>   
+                <label>
+                    <h5>Time of Reservation</h5>    
+                   
                 <input
                     className="form-control"
                     name="reservation_time"
@@ -68,10 +68,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     defaultValue={reservationDefaultValues.reservation_time}
                     onChange={changeHandler}
                 />
-
+                </label>
                 <label>
-                    <h3>Number of People</h3>    
-                </label> 
+                    <h5>Number of People</h5>    
+                 
                 <input
                     className="form-control"
                     name="people"
@@ -82,10 +82,10 @@ function ReservationForm({cancelHandler, changeHandler, submitFormHandler, reser
                     defaultValue={reservationDefaultValues.people}
                     onChange={changeHandler}
                 />
-                
+                </label>
                 </div>
-                <button type="button" className="btn btn-secondary mr-2" onClick={cancelHandler}>Cancel</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="button" className="btn btn-secondary m-2" onClick={cancelHandler}>Cancel</button>
+                <button type="submit" className="btn btn-primary m-2">Submit</button>
             </form>
 
         </div>

@@ -37,12 +37,11 @@ function ReservationView({reservations, cancelReservation}) {
                     </td>
                 </tr>
             )
-
     );
     return(
-        <div>
+        <div className="card col-sm-12 m-2">
+            <h5 className="card-title text-center">Reservations</h5>
             <table className="table table-striped">
-                
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -65,6 +64,7 @@ function ReservationView({reservations, cancelReservation}) {
 
             </table>
         </div>
+
     )
 }
 

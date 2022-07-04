@@ -58,7 +58,7 @@ function NewReservation() {
     return(
         <div>
           <div>
-            <h1>New Reservation</h1>
+            <h1 className="text-center">New Reservation</h1>
             <ReservationForm cancelHandler={cancelHandler} changeHandler={handleChange} submitFormHandler={handleSubmit} reservationDefaultValues={reservationForm} />
           </div>
           <div>

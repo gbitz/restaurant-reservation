@@ -98,13 +98,17 @@ function Dashboard() {
   
   return (
     <main>
-      <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+      <div className="col d-flex justify-content-center">
+        <h1>Reservation Scheduler</h1>
+      </div>
+      <div className="col d-flex justify-content-center">
+        <h4>{date}</h4>
+      </div>
+      <div className="col d-flex justify-content-center m-2">
+        <DateSelector date={date} setDate={setDate} history={history} />
       </div>
       <ErrorAlert error={error} />
-      <DateSelector date={date} setDate={setDate} history={history} />
-      <ReservationView reservations={reservations} cancelReservation={cancelReservation} />
+      {reservations.length > 0 ? <ReservationView reservations={reservations} cancelReservation={cancelReservation} /> : <h1>No reservations Found</h1>}
       <TableView tables={tables} setError={setError} handleFinish={handleFinish} loadTables={loadTables}/>
     </main>
   );

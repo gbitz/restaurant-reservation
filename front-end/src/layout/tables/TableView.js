@@ -26,7 +26,8 @@ function TableView({tables, handleFinish}) {
         )
     })
     return (
-        <div>
+        <div className="card col-sm-12 m-2">
+            <h5 className="card-title text-center">Tables</h5>
             <table className="table table-striped">
                 
                 <thead>

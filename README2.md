@@ -43,7 +43,7 @@ Displays matching reservations based on phone number.  Partial phone numbers wil
 ## API Information
 
 | Tables              |      `body`           | capacity `integer`, table_name `string`  | 
-| ------------------- | ---------------------------------------------------------------- |
+| ------------------- | ----------------------|----------------------------------------- |
 | `GET/ `             |     `list`            | Returns list of tables                   |
 | `POST/ `            |        `create`       | Creates a new table record               |
 | `PUT/:table:id/seat`|        `update`       | Changes table entry information          | | `POST/ `            |        `create`       | Creates a new table record               |

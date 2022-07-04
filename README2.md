@@ -56,6 +56,9 @@ Displays matching reservations based on phone number.  Partial phone numbers wil
 |`GET/:reservation_id`  |     `read`            | Returns reservation information based on ID  |
 |`PUT/:reservation_id`  | `update`              | Updates reservation information based on ID  |
 
+
+##Setup
+
 ### Knex
 
 Run `npx knex` commands from within the `back-end` folder, which is where the `knexfile.js` file is located.
@@ -64,7 +67,7 @@ Run `npx knex` commands from within the `back-end` folder, which is where the `k
 
 1. Fork and clone this repository.
 1. Run `cp ./back-end/.env.sample ./back-end/.env`.
-1. Update the `./back-end/.env` file with the connection URL's to your ElephantSQL database instance.
+1. Update the `./back-end/.env` file with the connection URL's to your database instance.
 1. Run `cp ./front-end/.env.sample ./front-end/.env`.
 1. You should not need to make changes to the `./front-end/.env` file unless you want to connect to a backend at a location other than `http://localhost:5001`.
 1. Run `npm install` to install project dependencies.
@@ -73,25 +76,6 @@ Run `npx knex` commands from within the `back-end` folder, which is where the `k
 
 ## Running tests
 
-This project has unit, integration, and end-to-end (e2e) tests. You have seen unit and integration tests in previous projects.
-End-to-end tests use browser automation to interact with the application just like the user does.
-Once the tests are passing for a given user story, you have implemented the necessary functionality.
-
-Test are split up by user story. You can run the tests for a given user story by running:
-
-`npm run test:X` where `X` is the user story number.
-
-Have a look at the following examples:
-
-- `npm run test:1` runs all the tests for user story 1 (both frontend and backend).
-- `npm run test:3:backend` runs only the backend tests for user story 3.
-- `npm run test:3:frontend` runs only the frontend tests for user story 3.
-
-Whenever possible, frontend tests will run before backend tests to help you follow outside-in development.
-
-> **Note** When running `npm run test:X` If the frontend tests fail, the tests will stop before running the backend tests. Remember, you can always run `npm run test:X:backend` or `npm run test:X:frontend` to target a specific part of the application.
-
-Once you have all user stories complete, you can run all the tests using the following commands:
 
 - `npm test` runs _all_ tests.
 - `npm run test:backend` runs _all_ backend tests.

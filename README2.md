@@ -46,7 +46,8 @@ Displays matching reservations based on phone number.  Partial phone numbers wil
 | ------------------- | ----------------------|----------------------------------------- |
 | `GET/ `             |     `list`            | Returns list of tables                   |
 | `POST/ `            |        `create`       | Creates a new table record               |
-| `PUT/:table:id/seat`|        `update`       | Changes table entry information          | | `POST/ `            |        `create`       | Creates a new table record               |
+| `PUT/:table:id/seat`|        `update`       | Changes table entry information          | | `DELETE/:table:id/seat`|   `finishReservation` | Removes Reservation from table        |
+
 
 
 

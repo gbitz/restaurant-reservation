@@ -1,4 +1,4 @@
-import methodNotAllowed from "../errors/methodNotAllowed"
+const methodNotAllowed = require("../errors/methodNotAllowed")
 
 /**
  * Defines the router for table resources.
@@ -18,5 +18,5 @@ router.route("/:table_id/seat")
     .put(controller.update)
     .delete(controller.finishReservation)
     .all(methodNotAllowed)
-    
+
 module.exports = router;

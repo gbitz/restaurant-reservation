@@ -1,4 +1,4 @@
-import methodNotAllowed from "../errors/methodNotAllowed"
+const methodNotAllowed = require("../errors/methodNotAllowed")
 /**
  * Defines the router for reservation resources.
  *

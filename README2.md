@@ -40,10 +40,12 @@ Allows users to seat a reservation at a selected table, tables that currently ha
 Displays matching reservations based on phone number.  Partial phone numbers will work too
 ![Alt text](https://lh3.googleusercontent.com/reejrfSRWgZyxUIirHZAIR-C2SeWsVmLAc4pBb-TOf6peCLNWDAoBx9HtwJnqqeEsn1XqwNgck21scS2ovcLwbqys17w8gh1ImTP1BDH5KGVJGGo4KYaeRr7xO74rgqBo4e5RP_Mb6oP76G-gqnt1TiJmyVfnpOVrIPuhAjQiZEttfo4Reh_yAm3r534j5wbH-sNmYlZxwHrMplYyPRQa9KqKF71x_10O6ySC5FXstjWDYNDMYKI08CAbXvbIky1mEIgB_eT8D6heLHemecHzg-GYUVzanzLBGe9RX6iZBykd3iOXGWqE3tNf9DS1SFW2DUFo31tc5sTIygMOoA9IOLcBPcy7S69lEnEQSGqOoyMeEc_w-FkCU-0_Eqc8vTXA1j7njJsXdpD5GbBzeiazYGt3_3Pd2SCt04hlN1eLDNoEnAi2aqjxPHDHSXE9rNTKgDI6Jw5EZOoQ308TmrUKU6hQZJ4aFU15BAHuMnvR80ZtlqdmjWdZT4iBjJ8zaJ6K2OFXBuA664lKUB9n-Ru-cHHC7fpSok-EtY43ZnOj-ZilO-brtlKQR3GBtfhHJzS1fCEE7WdyHa9Gk3JS2K9YqLxqbA2jrkBUKz1HVKTRtcj3TNgrq1cmDQRMqjfLyTeQzQsU-bYyXWdZerSz2dDcXzT2fHClNeq5iavhy84NTEb8FqNLtIoX7Eetjp-o6L8dTbObxR6zdFuwSYh7q0Qc_KRYyaMMZc8Xx8xLHVdJGsz4eb97e_XJD0YPyE=w1917-h867-no?authuser=0 "Search Phone Number")
 
-## Database setup
+## API Controls
 
-1. Set up four new ElephantSQL database instances - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
-1. After setting up your database instances, connect DBeaver to your new database instances by following the instructions in the "PostgreSQL: Installing DBeaver" checkpoint.
+| Folder/file path | Description                                                      |
+| ---------------- | ---------------------------------------------------------------- |
+| `./back-end`     | The backend project, which runs on `localhost:5001` by default.  |
+| `./front-end`    | The frontend project, which runs on `localhost:3000` by default. |
 
 ### Knex
 

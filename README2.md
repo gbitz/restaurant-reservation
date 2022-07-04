@@ -16,6 +16,10 @@ This app allows users/restaurants to create and manage reservations for a restau
 * Bootstrap
 
 
+## Functionality Examples 
+
+![Alt text](https://drive.google.com/file/d/15IkfZLzMBrFZRPNQ4yeVCB6tbBGxp-3o/view?usp=sharing "Optional title")
+
 ## Database setup
 
 1. Set up four new ElephantSQL database instances - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.

@@ -37,6 +37,7 @@ function ReservationView({reservations, cancelReservation}) {
                     </td>
                 </tr>
             )
+            
     );
     return(
         <div className="card col-sm-12 m-2">

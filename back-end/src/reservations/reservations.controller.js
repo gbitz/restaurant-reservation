@@ -65,9 +65,9 @@ function checkStatusFinished(req,res,next) {
 }
 
 function checkDayOfWeek(req,res,next) {
-  const {reservation_date} = req.body.data;
-  const testDate = new Date(reservation_date)
-  if (testDate.getDay() != "1") {
+  const {reservation_date, reservation_time} = req.body.data;
+  const testDate =  new Date(`${reservation_date} ${reservation_time}`)
+  if (testDate.getDay() != "2") {
     return next();
   }
   next({status:400, message:`Restaurant closed on Tuesdays`})

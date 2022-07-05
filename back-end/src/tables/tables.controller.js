@@ -83,7 +83,7 @@ async function checkReservationExists(req,res,next) {
     next({status:404, message:`${reservation_id} does not exist`})
 }
 
-async function checkTableSize(req,res,next) {
+function checkTableSize(req,res,next) {
     const {table, reservation} = res.locals;
     if(table.capacity >= reservation.people) {
         return next();
@@ -91,7 +91,7 @@ async function checkTableSize(req,res,next) {
     next({status:400, message:"insufficient table capacity"})
 } 
 
-async function checkIfOccupied(req,res,next) {
+function checkIfOccupied(req,res,next) {
     const {table} = res.locals;
     if (!table.reservation_id) {
         return next();
@@ -99,7 +99,7 @@ async function checkIfOccupied(req,res,next) {
     next({status:400, message:"table is occupied"})
 }
 
-async function checkIfNotOccupied(req,res,next) {
+function checkIfNotOccupied(req,res,next) {
     const {table} = res.locals;
     if (table.reservation_id) {
         return next();
@@ -137,7 +137,7 @@ async function updateReservationStatus(req,res,next) {
     } 
 }
 
-async function checkStatusSeated(req,res,next) {
+function checkStatusSeated(req,res,next) {
     const {reservation} = res.locals
     if (reservation.status === "booked") {
         return next();
